@@ -1,159 +1,102 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { GlassContainer } from "@/components/shared/glass-container"
+import Link from "next/link";
 import {
+  ArrowRight,
+  Brain,
+  Briefcase,
   Code,
+  Gamepad2,
+  Info,
   Palette,
   Smartphone,
-  Gamepad2,
-  Briefcase,
   Users,
-  Brain,
-  Info,
-  ArrowRight
 } from "lucide-react";
 import SocialLinksSection from "./social-links";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { Section, Reveal } from "@/components/shared/section";
 
-const MotionCard = motion(Card);
+const teams = [
+  { icon: Code, name: "Competitive Programming Team" },
+  { icon: Palette, name: "Multimedia Team" },
+  { icon: Smartphone, name: "Web and App Development Team" },
+  { icon: Gamepad2, name: "Game Development Team" },
+];
+
+const reasons = [
+  {
+    icon: Briefcase,
+    title: "Get industry experience",
+    body: "Learn how professionals in the industry work and prepare yourself as Programmers Den operates under industry standards.",
+  },
+  {
+    icon: Users,
+    title: "Collaborate with senior programmers",
+    body: "Get trained by your mentors and learn to manage projects with other skilled members.",
+  },
+  {
+    icon: Brain,
+    title: "Use AI technology",
+    body: "We see AI as a tool to improve and innovate. Learn how to use modern technologies like AI to become a better programmer.",
+  },
+];
 
 export default function ConnectWithUsSection() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-8xl rounded-xl p-4 sm:p-8 space-y-8">
-        {/* Social links section */}
-        <SocialLinksSection />
+    <>
+      <SocialLinksSection />
 
-        {/* Work with us section */}
-        <div className="text-center">
-          <h2 className="text-white text-4xl sm:text-5xl font-bold">Work with us!</h2>
-          <p className="text-gray-300 text-lg mt-2">All Red Hawks are welcome!</p>
-        </div>
+      <Section label="Divisions">
+        <Reveal>
+          <div className="flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
+            <h2 className="display-lg">Work with us!</h2>
+            <p className="data-label pb-1">All Red Hawks are welcome</p>
+          </div>
 
-        {/* Team Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Code className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">Competitive Programming Team</h3>
-          </MotionCard>
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Palette className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">Multimedia Team</h3>
-          </MotionCard>
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Smartphone className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">Web and App Development Team</h3>
-          </MotionCard>
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Gamepad2 className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">Game Development Team</h3>
-          </MotionCard>
-        </div>
+          {/* The four divisions. A 1px grid gap on a light background gives the
+              cells shared hairlines, so they read as one table rather than four
+              floating cards. */}
+          <ul className="mt-10 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+            {teams.map(({ icon: Icon, name }) => (
+              <li
+                key={name}
+                className="flex min-h-[11rem] flex-col justify-between bg-pd-black p-6 transition-colors hover:bg-pd-dark-grey/40"
+              >
+                <Icon className="h-5 w-5 text-pd-green" aria-hidden />
+                <h3 className="display-sm text-lg leading-tight md:text-xl">
+                  {name}
+                </h3>
+              </li>
+            ))}
+          </ul>
 
-        {/* Detailed Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Briefcase className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">GET INDUSTRY EXPERIENCE</h3>
-            <p className="text-gray-300 text-sm">
-              Learn how professionals in the industry work and prepare yourself as Programmers Den operates under
-              industry standards.
-            </p>
-          </MotionCard>
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Users className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">COLLABORATE WITH SENIOR PROGRAMMERS</h3>
-            <p className="text-gray-300 text-sm">
-              Get trained by your mentors and learn to manage projects with other skilled members.
-            </p>
-          </MotionCard>
-          <MotionCard
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105">
-            <div className="bg-purple-800/50 p-3 rounded-full">
-              <Brain className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-white text-lg font-semibold">USE AI TECHNOLOGY</h3>
-            <p className="text-gray-300 text-sm">
-              We see AI as a tool to improve and innovate. Learn how to use modern technologies like AI to become a
-              better programmer.
-            </p>
-          </MotionCard>
-        </div>
+          <ul className="mt-px grid gap-px bg-white/10 md:grid-cols-3">
+            {reasons.map(({ icon: Icon, title, body }) => (
+              <li key={title} className="bg-pd-black p-8">
+                <Icon className="h-5 w-5 text-pd-purple" aria-hidden />
+                <h3 className="display-sm mt-6 text-lg md:text-xl">{title}</h3>
+                <p className="prose-body mt-4 text-[0.9375rem]">{body}</p>
+              </li>
+            ))}
+          </ul>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="min-w-[200px] bg-transparent border-white border-2 text-white hover:bg-white hover:text-pd-purple font-bold text-lg"
-          >
-            <Link href="/about">
-              <Info className="mr-2 h-5 w-5" />
+          <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/join"
+              className="group inline-flex items-center justify-center gap-3 bg-pd-green px-8 py-4 font-mono text-xs uppercase tracking-[0.16em] text-pd-void transition-colors hover:bg-white"
+            >
+              Sign up
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center justify-center gap-3 border border-white/25 px-8 py-4 font-mono text-xs uppercase tracking-[0.16em] transition-colors hover:border-pd-green hover:text-pd-green"
+            >
+              <Info className="h-4 w-4" />
               About us
             </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            className="min-w-[200px] bg-white font-bold text-lg group"
-          >
-            <Link href="/join">
-              Sign Up
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </div>
-  )
+          </div>
+        </Reveal>
+      </Section>
+    </>
+  );
 }

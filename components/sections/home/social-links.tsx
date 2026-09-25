@@ -1,80 +1,82 @@
-import { Facebook, Youtube, MessageCircle, Mail } from "lucide-react";
-import { GlassContainer } from "@/components/shared/glass-container";
-import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
+"use client";
 
-const MotionCard = motion(Card);
+import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
+// lucide-react v1 dropped brand icons; Tabler provides the equivalents.
+import {
+  IconBrandFacebook as Facebook,
+  IconBrandYoutube as Youtube,
+} from "@tabler/icons-react";
+import { Section, Reveal } from "@/components/shared/section";
+
+const socialLinks = [
+  {
+    name: "Facebook",
+    icon: Facebook,
+    url: "https://facebook.com/ccsprogrammersden",
+    description: "Follow us on Facebook",
+  },
+  {
+    name: "YouTube",
+    icon: Youtube,
+    url: "https://www.youtube.com/@progdenofficial",
+    description: "Subscribe to our channel",
+  },
+  {
+    name: "Discord",
+    icon: MessageCircle,
+    url: "https://discord.gg/bTXvdggz4g",
+    description: "Join the Official CCS Discord server",
+  },
+  {
+    name: "Email",
+    icon: Mail,
+    url: "mailto:progdenofficial@gmail.com",
+    description: "Send us an email",
+  },
+];
 
 export default function SocialLinksSection() {
-  const socialLinks = [
-    {
-      name: "Facebook",
-      icon: Facebook,
-      url: "https://facebook.com/ccsprogrammersden",
-      description: "Follow us on Facebook",
-      iconBg: "bg-blue-600/50",
-      iconColor: "text-blue-400",
-    },
-    {
-      name: "YouTube",
-      icon: Youtube,
-      url: "https://www.youtube.com/@progdenofficial",
-      description: "Subscribe to our channel",
-      iconBg: "bg-red-600/50",
-      iconColor: "text-red-400",
-    },
-    {
-      name: "Discord",
-      icon: MessageCircle,
-      url: "https://discord.gg/bTXvdggz4g",
-      description: "Join the Official CCS Discord server",
-      iconBg: "bg-indigo-600/50",
-      iconColor: "text-indigo-400",
-    },
-    {
-      name: "Email",
-      icon: Mail,
-      url: "mailto:progdenofficial@gmail.com",
-      description: "Send us an email",
-      iconBg: "bg-green-600/50",
-      iconColor: "text-green-400",
-    },
-  ]
-
   return (
-      <div className="mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-5xl font-bold mb-6 text-white">Connect With CCS Programmers' Den</h2>
-          <p className="text-lg max-w-2xl mx-auto text-gray-300 mb-4">
-            Stay updated with Programmers' Den through our social links!
-            Where great minds compile!
-          </p>
-        </div>
+    <Section label="Find us">
+      <Reveal>
+        <h2 className="display-lg max-w-[16ch]">
+          Connect with CCS Programmers&apos; Den
+        </h2>
+        <p className="prose-lead mt-6">
+          Stay updated with Programmers&apos; Den through our social links!
+          Where great minds compile!
+        </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12">
-          {socialLinks.map((link) => {
-            const IconComponent = link.icon
-            return (
-              <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="block">
-                <MotionCard
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105"
-                >
-                  <div className={`${link.iconBg} p-3 rounded-full`}>
-                    <IconComponent className={`w-6 h-6 md:w-8 md:h-8 ${link.iconColor}`} />
-                  </div>
-                  <div>
-                    <h3 className="text-white text-base md:text-lg font-semibold mb-1">{link.name}</h3>
-                    <p className="text-xs md:text-sm text-gray-300">{link.description}</p>
-                  </div>
-                </MotionCard>
+        <ul className="mt-12 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          {socialLinks.map(({ name, icon: Icon, url, description }) => (
+            <li key={name}>
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-full flex-col justify-between gap-8 bg-pd-black p-6 transition-colors hover:bg-pd-dark-grey/40"
+              >
+                <div className="flex items-start justify-between">
+                  <Icon
+                    className="h-6 w-6 text-foreground/60 transition-colors group-hover:text-pd-green"
+                    aria-hidden
+                  />
+                  <ArrowUpRight
+                    className="h-4 w-4 text-white/20 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-pd-green"
+                    aria-hidden
+                  />
+                </div>
+                <div>
+                  <h3 className="display-sm text-base md:text-lg">{name}</h3>
+                  <p className="mt-1 font-mono text-xs leading-relaxed text-foreground/60">
+                    {description}
+                  </p>
+                </div>
               </a>
-            )
-          })}
-        </div>
-      </div>
-  )
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </Section>
+  );
 }

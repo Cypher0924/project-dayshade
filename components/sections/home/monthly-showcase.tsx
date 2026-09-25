@@ -1,98 +1,74 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCurrentShowcase } from "@/lib/projects/getCurrentShowcase";
-import * as React from "react";
-import { motion } from "framer-motion";
+import { Section, Reveal } from "@/components/shared/section";
+import { TagList } from "@/components/shared/tag-list";
 
 export function MonthlyShowcase() {
+  const [project, setProject] = useState<any | null>(null);
 
-    const [project, setProject] = useState<any | null>(null);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-      setMounted(true);
-    }, []);
-
-    useEffect(() => {
-      async function load() {
-        try {
-          const data = await getCurrentShowcase();
-          setProject(data);
-        } catch (e) {
-          console.error(e);
-        }
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await getCurrentShowcase();
+        setProject(data);
+      } catch (e) {
+        console.error(e);
       }
-      load();
-    }, []);
-
-    if (!mounted) {
-      return null;
     }
+    load();
+  }, []);
 
-    if (!project) {
-      return (
-        <section className="py-24 w-full text-center text-white/60">
-          Loading project showcase...
-        </section>
-      );
-    }
-
-  const MotionGlassContainer = motion.div
+  if (!project) {
+    return (
+      <Section label="Monthly project showcase">
+        <p className="data-label">Loading project showcase…</p>
+      </Section>
+    );
+  }
 
   return (
-    <section className="w-full h-full p-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-8xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-4">
-          <h2 className="text-3xl lg:text-5xl italic font-bold text-pd-green">
-            Monthly Project Showcase
-          </h2>
-        </div>
-        {/* Project Card */}
-        <div className="bg-pd-black rounded-2xl p-6 md:p-8 border border-gray-800">
-          <div className="text-center">
-            <h3 className="text-xl md:text-3xl font-bold mb-4">
-              {project.title}
-            </h3>
-          </div>
-          {/* Project Youtube Embed */}
-          <div className="relative w-full flex items-center justify-center mx-auto mb-6 rounded-lg overflow-hidden">
-            <div className="md:w-[80%] h-[400px] md:h-[500px]">
-              <iframe
-                key={project.youtubeId}
-                src={project.embed_url}
-                title={project.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-            </div>
-          {/* Credits */}
-          <p className="text-white text-sm text-left mb-4 leading-relaxed">
-            <span className="font-medium">Developer:</span>{" "}
-            {project.devs.join(", ")}
-          </p>
-          {/* Description */}
-          <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl line-clamp-3">
-            {project.description}
-          </p>
+    <Section label="Monthly project showcase">
+      <Reveal>
+        <h2 className="display-md max-w-4xl">{project.title}</h2>
 
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mt-4">
-            {project.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="bg-pd-purple/20 text-pd-purple px-3 py-1 rounded-full text-xs font-semibold"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        <div className="panel mt-10 aspect-video w-full overflow-hidden">
+          <iframe
+            key={project.youtubeId}
+            src={project.embed_url}
+            title={project.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="h-full w-full"
+          />
         </div>
-      </div>
-    </section>
+
+        {/* The record beneath the work: prose on the left, everything the
+            organization measures on the right. */}
+        <div className="mt-10 grid gap-10 border-t border-white/10 pt-8 md:grid-cols-[1.6fr_1fr] md:gap-16">
+          <p className="prose-body line-clamp-4">{project.description}</p>
+
+          <dl className="space-y-6">
+            <div>
+              <dt className="data-label">
+                {project.devs.length === 1 ? "Developer" : "Developers"}
+              </dt>
+              <dd className="mt-2 font-mono text-sm leading-relaxed text-foreground/80">
+                {project.devs.join(", ")}
+              </dd>
+            </div>
+            {project.tags?.length ? (
+              <div>
+                <dt className="data-label">Stack</dt>
+                <dd className="mt-3">
+                  <TagList tags={project.tags} />
+                </dd>
+              </div>
+            ) : null}
+          </dl>
+        </div>
+      </Reveal>
+    </Section>
   );
 }

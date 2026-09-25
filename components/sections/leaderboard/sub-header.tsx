@@ -1,35 +1,37 @@
-import { GlassContainer } from "@/components/shared/glass-container";
-import { X } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import { SectionLabel } from "@/components/shared/section";
 
 const SubHeader = () => {
   return (
-    <GlassContainer className="pb-9 pt-8 lb-glass-plus">
-      <div className={`space-y-2 lb-content-width`}>
-        <span className="flex items-center">
-          <Image
-            src="/assets/pd-logo.png"
-            alt="PD Logo"
-            width={52}
-            height={35}
-            className="rounded-lg"
-          />
-          <X className="text-red-700" />
-          <Image
-            src="/assets/csc-logo.png"
-            alt="CSC Logo"
-            width={52}
-            height={35}
-            className="rounded-lg"
-          />
+    <section className="rail-x pt-16 md:pt-24">
+      <SectionLabel>Standings</SectionLabel>
+
+      {/* Co-branded event: two marks, joined. */}
+      <div className="mt-8 flex items-center gap-3">
+        <Image
+          src="/assets/pd-logo.png"
+          alt="Programmers' Den"
+          width={52}
+          height={35}
+          className="h-8 w-auto"
+        />
+        <span aria-hidden className="font-mono text-sm text-pd-light-grey">
+          ×
         </span>
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-[#791212] bg-clip-text text-transparent">
-          QuiCCStions Overdrive
-        </h1>
-        <p className="md:text-lg">Check who’s winning the race!</p>
+        <Image
+          src="/assets/csc-logo.png"
+          alt="CCS Student Council"
+          width={52}
+          height={35}
+          className="h-8 w-auto"
+        />
       </div>
-    </GlassContainer>
+
+      {/* Not uppercased: the inner caps in "QuiCCStions" are the CCS pun, and
+          the display class would flatten them. */}
+      <h1 className="display-xl mt-6 normal-case">QuiCCStions Overdrive</h1>
+      <p className="prose-lead mt-6">Check who&apos;s winning the race!</p>
+    </section>
   );
 };
 

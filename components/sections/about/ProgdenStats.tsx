@@ -1,97 +1,37 @@
 "use client";
 
-import { UsersRound, SquareCode, Medal } from "lucide-react";
-import React from "react";
-import { GlassContainer } from "@/components/shared/glass-container";
-import { Card, CardContent } from "@/components/ui/card";
+import { Section, Reveal } from "@/components/shared/section";
 
-import { motion } from "framer-motion";
+const stats = [
+  { value: "100+", label: "Active members", accent: "text-pd-green" },
+  { value: "20+", label: "Projects", accent: "text-pd-purple" },
+  { value: "12", label: "Years of excellence", accent: "text-foreground" },
+];
 
 export default function ProgdenStats() {
-  const stats = {
-    activeMembers: 100,
-    projectsCount: 20,
-    yearsOfExcellence: 12,
-  };
-
   return (
-    <div className="py-16">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: 0.2,
-            duration: 0.8,
-          }}
-        >
-          <GlassContainer className="m-6  bg-white/5 border border-white/10 shadow-lg backdrop-blur-sm ransition-all duration-300 hover:shadow-2xl hover:border-white/20">
-            <Card className="bg-transparent border-0 shadow-none">
-              <CardContent className="flex items-center justify-center flex-col gap-4 p-4">
-                <UsersRound className="size-24  " />
-                <p className="text-primary text-6xl font-bold m-0">
-                  {stats.activeMembers}+
-                </p>
-                <p className="text-primary text-xl m-0">Active Members</p>
-              </CardContent>
-            </Card>
-          </GlassContainer>
-        </motion.div>
+    <Section label="By the numbers">
+      <Reveal>
+        <div className="flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
+          <h2 className="display-lg">Our impact</h2>
+          <p className="data-label pb-1">Growing stronger every year</p>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: 0.4,
-            duration: 0.8,
-          }}
-        >
-          <GlassContainer className="m-6  bg-white/5 border border-white/10 shadow-lg backdrop-blur-sm ransition-all duration-300 hover:shadow-2xl hover:border-white/20">
-            <Card className="bg-transparent border-0 shadow-none">
-              <CardContent className="flex items-center justify-center flex-col gap-4 p-4">
-                <SquareCode className="size-24 " />
-                <p className="text-primary text-6xl font-bold m-0">
-                  {stats.projectsCount}+
-                </p>
-                <p className="text-primary text-xl m-0">PROJECTS</p>
-              </CardContent>
-            </Card>
-          </GlassContainer>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: 0.6,
-            duration: 0.8,
-          }}
-        >
-          <GlassContainer className="m-6  bg-white/5 border border-white/10 shadow-lg backdrop-blur-sm ransition-all duration-300 hover:shadow-2xl hover:border-white/20">
-            <Card className="bg-transparent border-0 shadow-none ">
-              <CardContent className="flex items-center justify-center flex-col gap-4 p-4">
-                <Medal className="size-24  " />
-                <p className="text-primary text-6xl font-bold m-0">
-                  {stats.yearsOfExcellence}
-                </p>
-                <p className="text-primary text-xl m-0">Years of Excellence</p>
-              </CardContent>
-            </Card>
-          </GlassContainer>
-        </motion.div>
-      </div>
-    </div>
+        {/* The numbers are the whole point of this section, so nothing else
+            competes with them. */}
+        <dl className="mt-10 grid gap-px bg-white/10 md:grid-cols-3">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-pd-black px-6 py-12 md:px-8">
+              <dd
+                className={`data-value text-6xl leading-none md:text-7xl lg:text-8xl ${stat.accent}`}
+              >
+                {stat.value}
+              </dd>
+              <dt className="data-label mt-6">{stat.label}</dt>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
+    </Section>
   );
 }

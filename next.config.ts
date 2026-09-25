@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
     formats: ["image/webp", "image/avif"],
+    // Next.js 16 narrowed the default to [75]; keep 100 allowed for the
+    // leaderboard promo image that requests quality={100}.
+    qualities: [75, 100],
     remotePatterns: [
       {
         protocol: "https",

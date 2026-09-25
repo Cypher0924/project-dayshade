@@ -1,98 +1,123 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Facebook, Mail, Youtube } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
+import Image from "next/image";
+import Link from "next/link";
+import { Mail } from "lucide-react";
+// lucide-react v1 dropped brand icons; Tabler provides the equivalents.
+import {
+  IconBrandFacebook as Facebook,
+  IconBrandYoutube as Youtube,
+} from "@tabler/icons-react";
+
+const browse = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Leaderboards", href: "/leaderboard" },
+];
+
+const apply = [
+  { label: "Perks", href: "/perks" },
+  { label: "Register", href: "/join" },
+];
+
+const socials = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/ccsprogrammersden",
+    Icon: Facebook,
+    external: true,
+  },
+  {
+    label: "Email",
+    href: "mailto:progdenofficial@gmail.com",
+    Icon: Mail,
+    external: false,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@ccsprogrammersden3712",
+    Icon: Youtube,
+    external: true,
+  },
+];
+
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+}) {
+  return (
+    <div>
+      <h2 className="data-label">{title}</h2>
+      <ul className="mt-5 space-y-3">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="link-rule inline-block text-base text-foreground/70 transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#363636] text-white px-4 md:px-8 lg:px-16 ">
-
-      <div className="max-w-7xl mx-auto py-8">
-        <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-16 lg:gap-24">
-          {/* Left Section: Logo, Description, Socials */}
-          <div className="flex flex-col gap-4 md:w-1/2 lg:w-2/5">
-            <div className="flex items-center">
-              <Image src="/assets/pd-logo-sm.png" alt="Programmers Den Logo" width={40} height={40} className="h-10 w-10" />
+    <footer className="border-t border-white/10 bg-pd-void">
+      <div className="rail-x py-16 md:py-20">
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-16">
+          <div>
+            <div className="flex items-center gap-1">
+              <Image
+                src="/assets/pd-logo-sm.png"
+                alt=""
+                width={40}
+                height={40}
+                className="h-8 w-auto"
+              />
               <Image
                 src="/assets/pd-banner.png"
-                alt="Programmers Den Banner"
+                alt="Programmers' Den"
                 width={200}
                 height={30}
-                className="h-auto w-48"
+                className="h-5 w-auto"
               />
             </div>
-            <p className="text-sm md:text-lg text-gray-300 max-w-md">
-              The computer technology-focused college organization preparing students for industry practices in Design and Development
+            <p className="prose-body mt-6 text-base">
+              The computer technology-focused college organization preparing
+              students for industry practices in Design and Development
             </p>
-            <div className="flex gap-4 mt-2">
-              <Link href="https://www.facebook.com/ccsprogrammersden" target="_blank" className="text-gray-300 hover:text-pd-purple transition-colors">
-                <Facebook className="h-6 w-6" />
-              </Link>
-              <Link href="mailto:progdenofficial@gmail.com" className="text-gray-300 hover:text-pd-purple transition-colors">
-                <Mail className="h-6 w-6" />
-              </Link>
-              <Link href="https://www.youtube.com/@ccsprogrammersden3712" target="_blank" className="text-gray-300 hover:text-pd-purple transition-colors">
-                <Youtube className="h-6 w-6" />
-              </Link>
+            <div className="mt-8 flex gap-3">
+              {socials.map(({ label, href, Icon, external }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="flex h-10 w-10 items-center justify-center border border-white/10 text-foreground/60 transition-colors hover:border-pd-purple hover:text-pd-purple"
+                >
+                  <Icon className="h-5 w-5" />
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Browse and Apply */}
-          <div className="grid grid-cols-2 gap-8 md:gap-16 lg:gap-24 md:w-1/2 lg:w-3/5">
-            {/* Browse Section */}
-            <div>
-              <h3 className="text-lg md:text-3xl font-bold mb-4">Browse</h3>
-              <ul className="space-y-2 text-sm md:text-lg text-gray-300">
-                <li>
-                  <Link href="/" className="hover:text-pd-purple transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="hover:text-pd-purple transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/projects" className="hover:text-pd-purple transition-colors">
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/leaderboards" className="hover:text-pd-purple transition-colors">
-                    Leaderboards
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Apply Section */}
-            <div>
-              <h3 className="text-lg md:text-3xl font-bold mb-4">Apply</h3>
-              <ul className="space-y-2 text-sm md:text-lg text-gray-300">
-                <li>
-                  <Link href="/perks" className="hover:text-pd-purple transition-colors">
-                    Perks
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/join" className="hover:text-pd-purple transition-colors">
-                    Register
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <FooterColumn title="Browse" links={browse} />
+          <FooterColumn title="Apply" links={apply} />
         </div>
 
-        <Separator className="my-4" />
-
-        {/* Bottom Section: University and Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm md:text-lg text-gray-400 gap-2">
-          <span>Tarlac State University | College of Computer Studies</span>
+        <div className="mt-16 flex flex-col gap-2 border-t border-white/10 pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-foreground/60 md:flex-row md:items-center md:justify-between">
+          <span>Tarlac State University — College of Computer Studies</span>
           <span>Programmers&apos; Den &copy; 2025</span>
         </div>
       </div>
     </footer>
-  )
+  );
 }

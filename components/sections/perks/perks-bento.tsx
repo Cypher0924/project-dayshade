@@ -1,135 +1,92 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
-import { Card } from "@/components/ui/card";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { Section, Reveal } from "@/components/shared/section";
 
-const MotionCard = motion(Card);
-
-function PerksBento() {
+/**
+ * Four benefits at two weights. The two that need explaining get a full row
+ * and a paragraph; the two that are self-evident from a photograph get a half
+ * row and a title. The asymmetry is the argument, so the grid keeps it.
+ */
+export default function PerksBento() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12 max-w-7xl mx-auto">
-      {/* join competitions card */}
-      <MotionCard
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="col-span-1 lg:col-span-2 overflow-hidden bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl"
-      >
-        <div className="flex flex-col lg:flex-row items-center justify-between p-8 lg:p-12 gap-8">
-          <div className="w-full lg:w-[60%]">
-            <h2 className="text-pd-green text-3xl lg:text-5xl font-bold tracking-tight mb-6">
-              Join Competitions and Events
-            </h2>
-            <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-              Get offered more opportunities to participate in competitions and
-              experience your college-life attending both National and
-              International events.
-              <br />
-              <br />
-              As a member of the elite programmers, the College puts its faith
-              in your skills.
-            </p>
-          </div>
+    <Section label="What membership gets you">
+      <Reveal>
+        <div className="grid gap-px bg-white/10 lg:grid-cols-2">
+          {/* Competitions — full width, needs the copy */}
+          <article className="bg-pd-black p-8 md:p-12 lg:col-span-2">
+            <div className="grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
+              <div>
+                <h3 className="display-md text-pd-green">
+                  Join competitions and events
+                </h3>
+                <p className="prose-body mt-6 text-lg">
+                  Get offered more opportunities to participate in competitions
+                  and experience your college-life attending both National and
+                  International events.
+                </p>
+                <p className="prose-body mt-4 text-lg">
+                  As a member of the elite programmers, the College puts its
+                  faith in your skills.
+                </p>
+              </div>
+              <Image
+                src="/assets/perks-pics/perks-2.png"
+                alt="Members competing at an event"
+                width={800}
+                height={800}
+                className="w-full"
+              />
+            </div>
+          </article>
 
-          <div className="relative w-full lg:w-[40%]">
-            <div className="absolute inset-0 bg-gradient-to-r from-pd-green/20 to-pd-purple/20 rounded-3xl blur-3xl" />
-            <Image
-              src="/assets/perks-pics/perks-2.png"
-              alt="Competitions and Events"
-              width={400}
-              height={400}
-              className="relative rounded-3xl transform transition-transform duration-500 hover:scale-105"
-            />
-          </div>
-        </div>
-      </MotionCard>
-
-      {/* merch card */}
-      <MotionCard
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="col-span-1 overflow-hidden bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl"
-      >
-        <div className="flex flex-col  p-8 gap-6 mx-auto">
-          <h2 className="bg-gradient-to-r from-pd-purple to-pd-green bg-clip-text text-transparent text-2xl lg:text-4xl font-bold tracking-tight text-center">
-            Exclusive Merchandise
-          </h2>
-          <div className="relative w-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-pd-purple/20 to-pd-green/20 rounded-3xl blur-3xl" />
+          {/* Merchandise — half width, the photograph carries it */}
+          <article className="flex flex-col gap-8 bg-pd-black p-8 md:p-12">
+            <h3 className="display-md text-pd-purple">Exclusive merchandise</h3>
             <Image
               src="/assets/perks-pics/perks-4.png"
-              alt="Exclusive Merchandise"
-              width={500}
-              height={400}
-              className="relative rounded-3xl transform transition-transform duration-500 hover:scale-105"
+              alt="Programmers' Den merchandise"
+              width={1000}
+              height={800}
+              className="mt-auto w-full"
             />
-          </div>
-        </div>
-      </MotionCard>
+          </article>
 
-      {/* portfolio card */}
-      <MotionCard
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        viewport={{ once: true }}
-        className="col-span-1 overflow-hidden bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl"
-      >
-        <div className="flex flex-col  p-8 gap-6 mx-auto">
-          <h2 className="bg-gradient-to-r from-pd-green to-pd-purple bg-clip-text text-transparent text-2xl lg:text-4xl font-bold tracking-tight text-center">
-            Build Your Portfolio
-          </h2>
-          <div className="relative w-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-pd-green/20 to-pd-purple/20 rounded-3xl blur-3xl" />
+          {/* Portfolio — half width */}
+          <article className="flex flex-col gap-8 bg-pd-black p-8 md:p-12">
+            <h3 className="display-md text-pd-green">Build your portfolio</h3>
             <Image
               src="/assets/perks-pics/perks-3.png"
-              alt="Build Your Portfolio"
-              width={500}
-              height={400}
-              className="relative rounded-3xl transform transition-transform duration-500 hover:scale-105"
+              alt="A member's project work"
+              width={1000}
+              height={800}
+              className="mt-auto w-full"
             />
-          </div>
-        </div>
-      </MotionCard>
+          </article>
 
-      {/* team sessions card */}
-      <MotionCard
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="col-span-1 lg:col-span-2 overflow-hidden bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl"
-      >
-        <div className="flex flex-col lg:flex-row-reverse items-center justify-between p-8 lg:p-12 gap-8">
-          <div className="w-full lg:w-[50%]">
-            <h2 className="text-pd-green text-3xl lg:text-5xl font-bold tracking-tight mb-6">
-              Monthly Team Sessions
-            </h2>
-            <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-              Learn more in the realm of Web and App development, Game
-              Development, and Multimedia with our Monthly Team Sessions!
-            </p>
-          </div>
-
-          <div className="relative w-full lg:w-[50%]">
-            <div className="absolute inset-0 bg-gradient-to-r from-pd-purple/20 to-pd-green/20 rounded-3xl blur-3xl" />
-            <Image
-              src="/assets/perks-pics/perks-5.png"
-              alt="Monthly Team Sessions"
-              width={500}
-              height={400}
-              className="relative rounded-3xl transform transition-transform duration-500 hover:scale-105"
-            />
-          </div>
+          {/* Team sessions — full width, image leads */}
+          <article className="bg-pd-black p-8 md:p-12 lg:col-span-2">
+            <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
+              <Image
+                src="/assets/perks-pics/perks-5.png"
+                alt="A monthly team session"
+                width={1000}
+                height={800}
+                className="w-full"
+              />
+              <div>
+                <h3 className="display-md text-pd-purple">
+                  Monthly team sessions
+                </h3>
+                <p className="prose-body mt-6 text-lg">
+                  Learn more in the realm of Web and App development, Game
+                  Development, and Multimedia with our Monthly Team Sessions!
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
-      </MotionCard>
-    </div>
+      </Reveal>
+    </Section>
   );
 }
-
-export default PerksBento;

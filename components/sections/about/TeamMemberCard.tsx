@@ -1,54 +1,66 @@
-// components/ui/team-member-card.tsx
-import { Github, Mail } from "lucide-react"
-import Image from "next/image"
-import type { TeamMember } from "@/data/teamMembers"
-import { MagicCard } from "@/components/magicui/magic-card"
+import { Mail } from "lucide-react";
+// lucide-react v1 dropped brand icons; Tabler provides the equivalents.
+import { IconBrandGithub as Github } from "@tabler/icons-react";
+import Image from "next/image";
+import type { TeamMember } from "@/data/teamMembers";
 
 interface TeamMemberCardProps {
-  member: TeamMember
+  member: TeamMember;
 }
 
+/**
+ * An officer record. The portrait fills the cell edge to edge rather than
+ * sitting in a circle inside a card, so a wall of officers reads as one roster
+ * instead of a row of badges.
+ */
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
   return (
-    <MagicCard className="rounded-2xl">
-      <div className="flex items-center text-muted justify-between h-88 flex-col p-6">
-        {/*  // pag inalis text-muted nagiging black sa pd officer hovering*/}
-        <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 border-2 shadow-md flex-shrink-0">
-          <Image
-            src={member.image}
-            alt={member.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
-          />
-        </div>
-        <h5 className="text-base sm:text-lg md:text-xl font-bold text-center tracking-wide">{member.name}</h5>
-        <p className="text-xs sm:text-sm p-1 px-4 rounded-full text-center font-semibold bg-white/10 my-2">
-          {member.title}
-        </p>
-        <div className="flex flex-row gap-4 items-center justify-center text-primary mt-4">
-          {member.socials.github && (
-            <a
-              href={member.socials.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors duration-300 hover:text-secondary"
-            >
-              <Github className="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-          )}
-          {member.socials.email && (
-            <a
-              href={`mailto:${member.socials.email}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors duration-300 hover:text-secondary"
-            >
-              <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-          )}
-        </div>
+    <article className="group flex h-full flex-col bg-pd-black">
+      <div className="relative aspect-[4/5] w-full overflow-hidden">
+        <Image
+          src={member.image}
+          alt={member.name}
+          fill
+          className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        />
       </div>
-    </MagicCard>
-  )
+
+      <div className="flex flex-1 flex-col gap-3 p-4 md:p-5">
+        <div>
+          <h3 className="display-sm text-sm leading-tight md:text-base">
+            {member.name}
+          </h3>
+          <p className="data-label mt-2 normal-case tracking-[0.08em]">
+            {member.title}
+          </p>
+        </div>
+
+        {member.socials.github || member.socials.email ? (
+          <div className="mt-auto flex items-center gap-3 pt-2">
+            {member.socials.github && (
+              <a
+                href={member.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} on GitHub`}
+                className="text-foreground/40 transition-colors hover:text-pd-green"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            )}
+            {member.socials.email && (
+              <a
+                href={`mailto:${member.socials.email}`}
+                aria-label={`Email ${member.name}`}
+                className="text-foreground/40 transition-colors hover:text-pd-green"
+              >
+                <Mail className="h-4 w-4" />
+              </a>
+            )}
+          </div>
+        ) : null}
+      </div>
+    </article>
+  );
 }

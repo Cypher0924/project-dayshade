@@ -2,12 +2,14 @@
 
 import {
   ColumnDef,
+  RowData,
   flexRender,
-  getCoreRowModel,
-  useReactTable,
-  getPaginationRowModel,
+  useTable,
 } from "@tanstack/react-table";
-import { Fragment } from "react";
+import {
+  LeaderboardTableFeatures,
+  leaderboardTableFeatures,
+} from "./table-features";
 
 import {
   Table,
@@ -18,25 +20,21 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Button } from "@/components/ui/button";
-import { GlassContainer } from "@/components/shared/glass-container";
-
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<TData extends RowData> {
+  columns: ColumnDef<LeaderboardTableFeatures, TData>[];
   data: TData[];
   dateUpdated: string | undefined;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends RowData>({
   columns,
   data,
   dateUpdated,
-}: DataTableProps<TData, TValue>) {
-  const table = useReactTable({
+}: DataTableProps<TData>) {
+  const table = useTable({
+    features: leaderboardTableFeatures,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
   });
 
   const formattedDate = dateUpdated
@@ -47,90 +45,114 @@ export function DataTable<TData, TValue>({
       })
     : "-";
 
+  const pageIndex = table.state.pagination?.pageIndex ?? 0;
+  const pageCount = table.getPageCount();
+  const rows = table.getRowModel().rows;
+
   return (
-    <div className="z-50 my-4 space-y-2">
-      <GlassContainer className="lb-glass-plus overflow-hidden rounded-md border border-white/20 p-4">
-        <Table className="border-collapse text-center">
+    <div>
+      <div className="panel overflow-hidden">
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow className="hover:bg-white/10" key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      className="text-white text-lg md:text-2xl border-b border-white/60 text-center pt-2 pb-1"
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+              <TableRow
+                key={headerGroup.id}
+                className="border-white/15 hover:bg-transparent"
+              >
+                {headerGroup.headers.map((header, index) => (
+                  <TableHead
+                    key={header.id}
+                    className={`data-label h-12 px-4 md:px-6 ${
+                      index === headerGroup.headers.length - 1
+                        ? "text-right"
+                        : ""
+                    }`}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="border-b border-white/20 last:border-b-0 md:text-base hover:bg-white/10"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+            {rows?.length ? (
+              rows.map((row) => {
+                const cells = row.getAllCells();
+                return (
+                  <TableRow
+                    key={row.id}
+                    className="border-white/10 transition-colors last:border-b-0 hover:bg-white/[0.04]"
+                  >
+                    {cells.map((cell, index) => (
+                      <TableCell
+                        key={cell.id}
+                        className={`px-4 py-5 md:px-6 ${
+                          index === 0 ? "w-20 md:w-28" : ""
+                        } ${index === cells.length - 1 ? "text-right" : ""}`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
-              <TableRow>
+              <TableRow className="hover:bg-transparent">
                 <TableCell colSpan={columns.length}>
-                  <div className="flex flex-col items-center justify-center gap-4 py-16">
-                    <div className="text-center space-y-2">
-                      <p className="text-2xl font-bold">
-                        Stay tuned! Rankings will be announced soon.
-                      </p>
-                      <p className="text-xs text-white/40 mt-4">
-                        Follow CSC announcements for updates
-                      </p>
-                    </div>
+                  <div className="px-6 py-20 text-center">
+                    <p className="display-md">
+                      Stay tuned! Rankings will be announced soon.
+                    </p>
+                    <p className="data-label mt-6">
+                      Follow CSC announcements for updates
+                    </p>
                   </div>
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-      </GlassContainer>
-      <div className="flex items-center justify-between">
-        <p className="text-base md:text-lg mb-2 z-50 italic">
-          Last updated:&nbsp;{formattedDate}
-        </p>
-        <span className="flex items-center justify-center md:justify-end space-x-3 pt-2">
-          <Button
-            variant="outline"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            className="bg-pd-black/50 md:text-lg z-50 hover:brightness-60 hover:bg-foreground"
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            className="text-black md:text-lg z-50 hover:brightness-60  bg-foreground hover:bg-foreground"
-          >
-            Next
-          </Button>
-        </span>
+      </div>
+
+      <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="data-label">Last updated — {formattedDate}</p>
+
+        {pageCount > 1 ? (
+          <div className="flex items-center gap-5">
+            <span className="data-value text-xs text-foreground/60">
+              {String(pageIndex + 1).padStart(2, "0")}
+              <span className="mx-1 text-white/25">/</span>
+              {String(pageCount).padStart(2, "0")}
+            </span>
+            <div className="flex">
+              <button
+                type="button"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+                className="border border-white/15 px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.16em] transition-colors hover:border-pd-green hover:text-pd-green disabled:pointer-events-none disabled:opacity-35"
+              >
+                Prev
+              </button>
+              <button
+                type="button"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+                className="-ml-px border border-white/15 px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.16em] transition-colors hover:border-pd-green hover:text-pd-green disabled:pointer-events-none disabled:opacity-35"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -4,18 +4,17 @@ import { getEntries } from "@/lib/data/leaderboard-queries";
 
 export default async function LeaderboardView() {
   const leaderboard_entries = await getEntries();
+
   return (
-    <div className="lb-content-width">
-      <div className="lg:mx-20">
-        <h2 className="shadow-2xl text-center my-2 md:my-3 text-2xl md:text-4xl font-bold text-white z-50">
-          Leaderboard
-        </h2>
+    <section className="rail-x py-16 md:py-20">
+      <h2 className="display-lg border-b border-white/10 pb-8">Leaderboard</h2>
+      <div className="mt-10">
         <DataTable
           columns={columns}
           data={leaderboard_entries}
           dateUpdated={leaderboard_entries[0]?.date_uploaded}
         />
       </div>
-    </div>
+    </section>
   );
 }

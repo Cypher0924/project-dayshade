@@ -2,15 +2,16 @@
 
 import {
   ColumnDef,
-  flexRender,
-  getCoreRowModel,
   ColumnFiltersState,
-  useReactTable,
-  getPaginationRowModel,
-  getFilteredRowModel,
+  RowData,
   SortingState,
-  getSortedRowModel,
+  flexRender,
+  useTable,
 } from "@tanstack/react-table";
+import {
+  RecruitmentTableFeatures,
+  recruitmentTableFeatures,
+} from "./table-features";
 import {
   Table,
   TableBody,
@@ -30,28 +31,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<TData extends RowData> {
+  columns: ColumnDef<RecruitmentTableFeatures, TData>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends RowData>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const table = useReactTable({
+  const table = useTable({
+    features: recruitmentTableFeatures,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
       columnFilters,
@@ -164,11 +162,8 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
+                <TableRow key={row.id}>
+                  {row.getAllCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -205,7 +200,7 @@ export function DataTable<TData, TValue>({
             Previous
           </Button>
           <div className="text-sm text-muted-foreground">
-            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+            Page {table.state.pagination.pageIndex + 1} of {table.getPageCount()}
           </div>
           <Button
             variant="outline"

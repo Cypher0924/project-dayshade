@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { RecruitmentTableFeatures } from "./table-features";
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
 import {
@@ -87,7 +88,10 @@ const StatusButton = ({
   );
 };
 
-export const columns: ColumnDef<RecruitmentEntity>[] = [
+export const columns: ColumnDef<
+  RecruitmentTableFeatures,
+  RecruitmentEntity
+>[] = [
   { 
     accessorKey: "rowNumber",
     header: "#",

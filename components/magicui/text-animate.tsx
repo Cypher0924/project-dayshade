@@ -297,6 +297,28 @@ const defaultItemAnimationVariants: Record<
   },
 };
 
+/**
+ * `motion.create()` returns a brand new component type on every call, so
+ * calling it during render remounts the subtree and drops its state. Cache one
+ * motion component per element type at module scope instead.
+ */
+const motionComponentCache = new Map<ElementType, unknown>();
+
+function getMotionComponent(Component: ElementType) {
+  // Indirection so the cached value keeps exactly the type motion.create()
+  // infers for an ElementType, rather than a widened one.
+  const create = () => motion.create(Component);
+
+  const cached = motionComponentCache.get(Component) as
+    | ReturnType<typeof create>
+    | undefined;
+  if (cached) return cached;
+
+  const created = create();
+  motionComponentCache.set(Component, created);
+  return created;
+}
+
 const TextAnimateBase = ({
   children,
   delay = 0,
@@ -311,7 +333,7 @@ const TextAnimateBase = ({
   animation = "fadeIn",
   ...props
 }: TextAnimateProps) => {
-  const MotionComponent = motion.create(Component);
+  const MotionComponent = getMotionComponent(Component);
 
   let segments: string[] = [];
   switch (by) {
@@ -377,6 +399,10 @@ const TextAnimateBase = ({
 
   return (
     <AnimatePresence mode="popLayout">
+      {/* getMotionComponent() returns a module-level cached component per
+          element type, so its identity is stable across renders. The rule
+          cannot see through the helper call to verify that. */}
+      {/* eslint-disable-next-line react-hooks/static-components */}
       <MotionComponent
         variants={finalVariants.container as Variants}
         initial="hidden"

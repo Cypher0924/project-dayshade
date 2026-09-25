@@ -4,7 +4,9 @@ import type { ReactNode } from "react";
 interface GlassContainerProps {
   children: ReactNode;
   className?: string;
-  variant?: "default" | "card"; // Default for background use, card for cards HAHAHA
+  /** `panel` is the default spec-sheet surface; `glass` is for anything that
+   *  genuinely sits over other content. */
+  variant?: "default" | "card" | "glass";
 }
 
 export function GlassContainer({
@@ -13,20 +15,12 @@ export function GlassContainer({
   variant = "default",
 }: GlassContainerProps) {
   const variantClasses = {
-    default: "bg-black/50",
-    card: "bg-gradient-to-b from-white/30 to-black/10",
+    default: "panel",
+    card: "panel",
+    glass: "glass-card",
   };
+
   return (
-    <div
-      className={cn(
-        "glass-card",
-        `${variantClasses[variant]}`,
-        "border border-white/20",
-        "p-2",
-        className
-      )}
-    >
-      {children}
-    </div>
+    <div className={cn(variantClasses[variant], className)}>{children}</div>
   );
 }

@@ -279,7 +279,12 @@ export function JoinForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={loading}>
+        <Button
+          type="submit"
+          size="lg"
+          className="w-full font-mono text-xs uppercase tracking-[0.16em]"
+          disabled={loading}
+        >
           {loading ? "Submitting..." : "Submit"}
         </Button>
       </form>

@@ -40,7 +40,13 @@ const ProjectsListView = ({ onRefresh }: ProjectsListViewProps = {}) => {
   }
 
   useEffect(() => {
+    // loadProjects() awaits before it touches state, so this is a fetch-on-mount
+    // rather than the synchronous cascading setState the rule guards against.
+    // It is also reused as the refresh callback below, so it stays a function.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadProjects();
+    // Deliberately mount-only; loadProjects is re-created each render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <p>Loading...</p>;

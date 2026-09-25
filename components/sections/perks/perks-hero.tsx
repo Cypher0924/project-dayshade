@@ -1,61 +1,86 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import { SectionLabel } from "@/components/shared/section";
+
+const rise = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0 },
+};
+
+const sequence = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+};
 
 function PerksHero() {
   return (
-    <LazyMotion features={domAnimation}>
-      <div className="bg-card">
-        <div className="flex flex-col-reverse md:flex-row text-foreground justify-center items-center gap-8 lg:gap-12 max-w-7xl mx-auto">
+    <motion.section
+      variants={sequence}
+      initial="hidden"
+      animate="show"
+      className="rail-x pt-16 pb-16 md:pt-24 md:pb-24"
+    >
+      <div className="grid items-end gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+        <div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col space-y-6 max-w-xl w-full md:w-1/2 py-4 px-6 md:px-0"
+            variants={rise}
+            transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
           >
-            <h1 className="text-4xl lg:text-6xl font-bold tracking-tight">
-              Sign up for exclusive{" "}
-              <span className="bg-gradient-to-r from-pd-green to-pd-purple bg-clip-text text-transparent">
-                Membership perks
-              </span>
-            </h1>
-            <p className="text-lg mb-2 text-muted-foreground">
-              Join our community of passionate programmers and unlock amazing
-              benefits
-            </p>
-            <Button asChild size="lg" className="w-fit group">
-              <Link href="/join">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <SectionLabel>Membership</SectionLabel>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative w-full md:w-1/2 flex justify-end"
+          <motion.h1
+            variants={rise}
+            transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+            className="display-lg mt-8"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-pd-green/20 to-pd-purple/20 rounded-3xl blur-3xl" />
-            <Image
-              src="/assets/perks-pics/perks-1.png"
-              alt="Perks Hero Image"
-              width={500}
-              height={300}
-              className="relative shadow-2xl w-full object-contain md:max-w-[500px]"
-              priority
-            />
+            Sign up for exclusive{" "}
+            <span className="text-pd-green">membership perks</span>
+          </motion.h1>
+
+          <motion.p
+            variants={rise}
+            transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+            className="prose-lead mt-8"
+          >
+            Join our community of passionate programmers and unlock amazing
+            benefits
+          </motion.p>
+
+          <motion.div
+            variants={rise}
+            transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+            className="mt-10"
+          >
+            <Link
+              href="/join"
+              className="group inline-flex items-center gap-3 bg-pd-green px-8 py-4 font-mono text-xs uppercase tracking-[0.16em] text-pd-void transition-colors hover:bg-white"
+            >
+              Get started
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </motion.div>
         </div>
+
+        <motion.div
+          variants={rise}
+          transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+        >
+          <Image
+            src="/assets/perks-pics/perks-1.png"
+            alt="Programmers' Den members at an event"
+            width={1000}
+            height={600}
+            priority
+            className="w-full object-contain"
+          />
+        </motion.div>
       </div>
-    </LazyMotion>
+    </motion.section>
   );
 }
 
