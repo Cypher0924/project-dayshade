@@ -23,7 +23,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ```
 app/                    Routes only (App Router)
   (auth)/login/           Login page + server action
-  (site)/                 Public pages: about, events, join, leaderboard, perks, projects
+  (site)/                 Public pages: about, events, join, leaderboard, perks, projects, shop
   (status)/               404Page, recruitmentclose, design
   admin/                  Admin dashboard (auth-guarded by proxy.ts)
 components/

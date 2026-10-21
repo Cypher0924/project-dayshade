@@ -6,6 +6,8 @@ import ProgdenStory from "@/components/sections/about/progden-story";
 import TeamSection from "@/components/sections/about/team-section";
 import ProgdenStats from "@/components/sections/about/progden-stats";
 import SignUp from "@/components/sections/about/sign-up";
+import FormerOfficersSection from "@/components/sections/about/former-officers-section";
+import FormerMembersSection from "@/components/sections/about/former-members-section";
 
 export default function About() {
   return (
@@ -28,7 +30,7 @@ export default function About() {
       </div>
 
       <ProgdenStory />
-
+      
       <TeamSection />
 
       {/* // ! Temp remove muna, balik nalang if kumpleto na imgs ng old officers */}
@@ -42,6 +44,11 @@ export default function About() {
           <TeamMemberCircles />
         </div>
       </div> */}
+
+      {/* Former PD Officers & Former Members */}
+      <FormerOfficersSection />
+
+      <FormerMembersSection />
 
       {/* SEPARATOR */}
       <div className="flex items-center justify-center w-full ">
