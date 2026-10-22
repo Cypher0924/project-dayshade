@@ -1,37 +1,121 @@
-import React from "react";
-import PerksHero from "@/components/sections/perks/perks-hero";
-import PerksBento from "@/components/sections/perks/perks-bento";
-import PerksWorkHard from "@/components/sections/perks/perks-work-hard";
-import PerksMember from "@/components/sections/perks/perks-member";
+import Image from "next/image";
+import JoinCta from "@/components/sections/home/join-cta";
+import { ClipReveal } from "@/components/shared/clip-reveal";
+import { PillLink } from "@/components/shared/pill-link";
+import { cn } from "@/lib/utils";
+
+export const metadata = {
+  title: "Perks | Programmers' Den",
+  description: "What you get as a member of Programmers' Den.",
+};
+
+const PERKS = [
+  {
+    title: "Competitions and events",
+    body: "Get more chances to join competitions and attend national and international events during your college life. As a member of the elite programmers, the College puts its faith in your skills.",
+    image: { src: "/assets/perks-pics/perks-2.png", width: 511, height: 440, alt: "Members at the iRCITE 2023 conference" },
+  },
+  {
+    title: "Exclusive merchandise",
+    body: "Access to eye-catching Den merchandise, from shirts and hoodies to lanyards.",
+    image: { src: "/assets/perks-pics/perks-4.png", width: 7416, height: 4500, alt: "Programmers' Den merchandise" },
+    link: { href: "/shop", label: "Visit the shop" },
+  },
+  {
+    title: "Build your portfolio",
+    body: "Collaborate with senior members on real projects you can show in your portfolio.",
+    image: { src: "/assets/perks-pics/perks-3.png", width: 531, height: 366, alt: "Members working on a project" },
+  },
+  {
+    title: "Monthly team sessions",
+    body: "Learn more about web and app development, game development and multimedia in our monthly team sessions.",
+    image: { src: "/assets/perks-pics/perks-5.png", width: 529, height: 443, alt: "A Den team session" },
+  },
+];
+
+const PLAY = [
+  { src: "/assets/perks-pics/perks-6.png", width: 488, alt: "Virtual Dive" },
+  { src: "/assets/perks-pics/perks-7.png", width: 489, alt: "Super Smash Bros. tournament" },
+  { src: "/assets/perks-pics/perks-8.png", width: 460, alt: "Tekken tournament" },
+];
 
 export default function PerksPage() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-background to-background/95 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px]" />
-      <div className="absolute inset-0 bg-[url(/assets/pattern.png)] bg-cover bg-center opacity-5" />
-
-      <div className="absolute -right-10 top-20 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[600px] lg:h-[600px] bg-[url('/assets/star-1.png')] bg-contain bg-no-repeat bg-center opacity-60 blur-sm">
-        <div className="absolute inset-0 bg-pd-purple/20 mix-blend-overlay filter blur-3xl" />
-      </div>
-
-      <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] bg-[url('/assets/star-2.png')] bg-contain bg-no-repeat bg-center opacity-50 blur-sm">
-        <div className="absolute inset-0 bg-pd-green/20 mix-blend-overlay filter blur-3xl" />
-      </div>
-
-      <div className="absolute -right-20 bottom-20 w-[200px] h-[200px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] bg-[url('/assets/circle-purple.png')] bg-contain bg-no-repeat bg-center opacity-60 blur-sm">
-        <div className="absolute inset-0 bg-pd-purple/30 mix-blend-overlay filter blur-3xl" />
-      </div>
-
-      <div className="relative z-10 pt-12 md:pt-16 pb-20 ">
-        <div className="pt-12">
-          <PerksHero />
+    <div className="bg-pd-black text-pd-bone">
+      <header className="grid gap-12 px-5 pb-24 pt-36 md:grid-cols-12 md:items-end md:px-12 md:pb-32 md:pt-48">
+        <div className="md:col-span-7">
+          <h1 className="text-[clamp(3.5rem,9vw,9rem)] font-black leading-[0.85] tracking-[-0.045em]">
+            Membership perks
+          </h1>
+          <p className="mt-8 max-w-lg text-xl leading-snug text-pd-bone/70">
+            Join our community of passionate programmers and unlock these benefits.
+          </p>
+          <PillLink href="/join" className="mt-10">
+            Become a member
+          </PillLink>
         </div>
-        <div className="max-w-7xl mx-auto">
-          <PerksBento />
+        <Image
+          src="/assets/perks-pics/perks-1.png"
+          alt="Den members at a campus event"
+          width={596}
+          height={353}
+          priority
+          className="w-full rounded-[28px] md:col-span-5"
+        />
+      </header>
+
+      <section aria-label="Perks" className="border-t border-white/10">
+        {PERKS.map((perk, i) => (
+          <article
+            key={perk.title}
+            className="grid items-center gap-10 border-b border-white/10 px-5 py-20 md:grid-cols-12 md:px-12 md:py-28"
+          >
+            <ClipReveal className={cn("md:col-span-5", i % 2 === 1 && "md:order-2 md:col-start-8")}>
+              <Image
+                src={perk.image.src}
+                alt={perk.image.alt}
+                width={perk.image.width}
+                height={perk.image.height}
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="w-full max-w-[560px] rounded-[28px]"
+              />
+            </ClipReveal>
+            <div className={cn("md:col-span-6", i % 2 === 0 ? "md:col-start-7" : "md:order-1")}>
+              <h2 className="text-display">{perk.title}</h2>
+              <p className="mt-6 max-w-[48ch] text-lg leading-snug text-pd-bone/70 md:text-xl">{perk.body}</p>
+              {perk.link && (
+                <PillLink href={perk.link.href} variant="secondary" className="mt-8">
+                  {perk.link.label}
+                </PillLink>
+              )}
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section className="py-24 md:py-32">
+        <div className="px-5 md:px-12">
+          <h2 className="text-display">Work hard. Play hard.</h2>
+          <p className="mt-6 max-w-xl text-lg leading-snug text-pd-bone/70 md:text-xl">
+            We celebrate gaming too. Team-building activities that grow teamwork and healthy competition.
+          </p>
         </div>
-        <PerksWorkHard />
-        <PerksMember />
-      </div>
+        <ul className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-4 md:px-12 [scrollbar-color:rgb(255_255_255/0.25)_transparent] [scrollbar-width:thin]">
+          {PLAY.map((img) => (
+            <li key={img.src} className="shrink-0 snap-start">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={271}
+                className="h-[220px] w-auto rounded-[20px] md:h-[271px]"
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <JoinCta />
     </div>
   );
 }
