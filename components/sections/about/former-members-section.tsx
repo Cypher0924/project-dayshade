@@ -40,7 +40,7 @@ export default function FormerMembersSection() {
       <div className="max-w-5xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#43DAA1] tracking-tight mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-pd-green tracking-tight mb-2">
             Former Members
           </h2>
           <p className="text-zinc-400 text-sm md:text-base max-w-xl mx-auto">
@@ -53,7 +53,7 @@ export default function FormerMembersSection() {
         <GlassContainer className="bg-zinc-950/60 border border-zinc-800/80 rounded-2xl p-0 overflow-hidden shadow-2xl">
 
           {/* Scrollable List Container (media_1790778197433.png: list with horizontal dividing lines) */}
-          <div className="max-h-[380px] overflow-y-auto divide-y divide-zinc-800/80 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+          <div data-lenis-prevent className="max-h-[380px] overflow-y-auto divide-y divide-zinc-800/80 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
             {filteredMembers.length > 0 ? (
               filteredMembers.map((member, index) => (
                 <MemberRow key={member.id} member={member} index={index} />
@@ -104,7 +104,7 @@ function MemberRow({ member, index }: { member: FormerMember; index: number }) {
     >
       {/* Left: Avatar + Name + Role */}
       <div className="flex items-center gap-3.5">
-        <div className="size-10 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-xs font-bold text-[#43DAA1] shadow-inner flex-shrink-0">
+        <div className="size-10 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-xs font-bold text-pd-green shadow-inner flex-shrink-0">
           {initials}
         </div>
         <div>

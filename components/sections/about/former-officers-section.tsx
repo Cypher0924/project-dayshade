@@ -32,7 +32,7 @@ export default function FormerOfficersSection() {
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <div className="text-center mb-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#43DAA1] tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-pd-green tracking-tight">
             Former PD Officers
           </h2>
         </div>
@@ -40,7 +40,7 @@ export default function FormerOfficersSection() {
         {/* Year Dropdown Pill */}
         <div className="flex justify-center mb-10">
           <Select value={selectedYear} onValueChange={setSelectedYear}>
-            <SelectTrigger className="w-auto min-w-[160px] bg-[#222222] hover:bg-[#2b2b2b] text-white border-zinc-700/80 rounded-full px-6 py-2.5 h-auto text-base font-semibold shadow-lg transition-all focus:ring-2 focus:ring-[#43DAA1] cursor-pointer [&_svg]:size-5 [&_svg]:opacity-100 [&_svg_*]:stroke-[#69F0AE] [&_svg_*]:fill-[#69F0AE]">
+            <SelectTrigger className="w-auto min-w-[160px] bg-[#222222] hover:bg-[#2b2b2b] text-white border-zinc-700/80 rounded-full px-6 py-2.5 h-auto text-base font-semibold shadow-lg transition-all focus:ring-2 focus:ring-pd-green cursor-pointer [&_svg]:size-5 [&_svg]:opacity-100 [&_svg_*]:stroke-pd-green-accent [&_svg_*]:fill-pd-green-accent">
               <SelectValue placeholder="Select Year" />
             </SelectTrigger>
             <SelectContent className="bg-[#1c1c1e] border-zinc-700 text-white rounded-xl shadow-2xl z-50">
@@ -103,7 +103,7 @@ function OfficerCircle({ officer }: { officer: FormerOfficer }) {
       <TooltipTrigger asChild>
         <div className="relative flex flex-col items-center justify-start p-2 cursor-pointer group transition-transform duration-200 hover:-translate-y-1">
           {/* Avatar circle */}
-          <div className="size-20 sm:size-24 rounded-full border-2 border-zinc-700/80 group-hover:border-[#43DAA1] group-hover:shadow-[0_0_15px_rgba(67,218,161,0.35)] transition-all duration-300 overflow-hidden relative bg-zinc-900 flex items-center justify-center">
+          <div className="size-20 sm:size-24 rounded-full border-2 border-zinc-700/80 group-hover:border-pd-green group-hover:shadow-[0_0_15px_rgba(67,218,161,0.35)] transition-all duration-300 overflow-hidden relative bg-zinc-900 flex items-center justify-center">
             {officer.image && !imageError ? (
               <Image
                 src={officer.image}
@@ -114,7 +114,7 @@ function OfficerCircle({ officer }: { officer: FormerOfficer }) {
                 onError={() => setImageError(true)}
               />
             ) : (
-              <div className="flex flex-col items-center justify-center text-zinc-500 group-hover:text-[#43DAA1] transition-colors">
+              <div className="flex flex-col items-center justify-center text-zinc-500 group-hover:text-pd-green transition-colors">
                 <User className="size-9" />
               </div>
             )}

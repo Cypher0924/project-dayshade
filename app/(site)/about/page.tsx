@@ -5,13 +5,13 @@ import HeroSection from "@/components/sections/about/hero-section";
 import ProgdenStory from "@/components/sections/about/progden-story";
 import TeamSection from "@/components/sections/about/team-section";
 import ProgdenStats from "@/components/sections/about/progden-stats";
-import SignUp from "@/components/sections/about/sign-up";
+import JoinCta from "@/components/sections/home/join-cta";
 import FormerOfficersSection from "@/components/sections/about/former-officers-section";
 import FormerMembersSection from "@/components/sections/about/former-members-section";
 
 export default function About() {
   return (
-    <div className="relative ">
+    <div className="relative bg-pd-black text-pd-bone">
       <HeroSection />
 
       {/* Panel 2 */}
@@ -24,9 +24,9 @@ export default function About() {
           width={512}
           height={512}
         />
-        <h1 className=" sm:text-9xl text-4xl font-bold z-10">
-          TOGETHER, FOREVER
-        </h1>
+        <h2 className="z-10 text-center text-display uppercase">
+          Together, forever
+        </h2>
       </div>
 
       <ProgdenStory />
@@ -38,25 +38,14 @@ export default function About() {
 
       <FormerMembersSection />
 
-      {/* SEPARATOR */}
-      <div className="flex items-center justify-center w-full ">
-        <div className="bg-gradient-to-r to-[#73FFC5] from-[#2B5B3B] h-12 w-full"></div>
-
-        <div className="flex flex-col items-center mx-8">
-          <h2 className="text-4xl font-bold text-[#43DAA1] whitespace-nowrap">
-            Our Impact
-          </h2>
-          <p className="text-lg text-gray-400 whitespace-nowrap">
-            Growing stronger every year
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-r to-[#2B5B3B] from-[#73FFC5] h-12 w-full"></div>
+      <div className="border-t border-white/10 px-5 pt-24 text-center md:px-12">
+        <h2 className="text-display">Our impact</h2>
+        <p className="mt-4 text-lg text-pd-bone/65">Growing stronger every year</p>
       </div>
 
       <ProgdenStats />
 
-      <SignUp />
+      <JoinCta />
     </div>
   );
 }

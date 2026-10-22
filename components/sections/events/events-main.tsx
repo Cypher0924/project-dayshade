@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import EventsTimelineView from "./events-timeline-view";
 import EventsYearOverview from "./events-year-overview";
+import { scrollToTop } from "@/components/providers/smooth-scroll";
 
 export default function EventsMain() {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
@@ -20,13 +21,13 @@ export default function EventsMain() {
   // Select a year and scroll back to the top of the page
   const handleSelectYear = (year: number) => {
     setSelectedYear(year);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToTop();
   };
 
   // Return to the year selection and scroll back to the top
   const handleBack = () => {
     setSelectedYear(null);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToTop();
   };
 
   return (
