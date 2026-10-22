@@ -279,8 +279,12 @@ export function JoinForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "Submitting..." : "Submit"}
+        <Button
+          type="submit"
+          className="h-14 w-full rounded-full bg-pd-green text-lg font-bold text-pd-black hover:bg-pd-bone"
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "Submit application"}
         </Button>
       </form>
     </Form>
