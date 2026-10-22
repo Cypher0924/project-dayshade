@@ -78,13 +78,6 @@ export default function Footer() {
         <span>Tarlac State University, College of Computer Studies</span>
         <span>Programmers&apos; Den &copy; {new Date().getFullYear()}</span>
       </div>
-
-      <p
-        aria-hidden="true"
-        className="pointer-events-none select-none whitespace-nowrap px-3 text-[27.5vw] font-black lowercase leading-[0.72] tracking-[-0.06em] text-white/[0.05]"
-      >
-        progden
-      </p>
     </footer>
   );
 }
