@@ -25,7 +25,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lerp: 0.1,
       anchors: true,
       // Let dialogs, sheets and opted-out areas scroll natively.
-      prevent: (node) => !!node.closest('[role="dialog"], [data-lenis-prevent]'),
+      prevent: (node) => !!node.closest('[role="dialog"], [role="listbox"], [role="menu"], [data-lenis-prevent]'),
     });
     lenisRef.current = lenis;
     activeLenis = lenis;
@@ -35,7 +35,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    // Radix dialogs, selects and menus lock page scroll via body[data-scroll-locked]; respect it.
+    const syncLock = () =>
+      document.body.hasAttribute("data-scroll-locked") ? lenis.stop() : lenis.start();
+    const lockObserver = new MutationObserver(syncLock);
+    lockObserver.observe(document.body, { attributes: true, attributeFilter: ["data-scroll-locked"] });
+
     return () => {
+      lockObserver.disconnect();
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
