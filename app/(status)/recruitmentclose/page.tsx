@@ -2,7 +2,7 @@ import { PillLink } from "@/components/shared/pill-link";
 
 export default function ClosedRecruitment() {
   return (
-    <div className="flex min-h-screen flex-col justify-end bg-pd-black px-5 pb-20 pt-36 text-pd-bone md:px-12 md:pb-28">
+    <div className="flex min-h-screen flex-col justify-end px-5 pb-20 pt-36 text-pd-bone md:px-12 md:pb-28">
       <h1 className="text-display-xl">Recruitment is closed.</h1>
       <p className="mt-8 max-w-lg text-xl leading-snug text-pd-bone/70">
         We&apos;re not looking for new members right now. Follow our Facebook page to hear when

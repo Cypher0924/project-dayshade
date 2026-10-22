@@ -21,7 +21,7 @@ const STATS = [
 
 export default function JoinPage() {
   return (
-    <div className="bg-pd-black px-5 pb-24 pt-36 text-pd-bone md:px-12 md:pb-32 md:pt-48">
+    <div className="px-5 pb-24 pt-36 text-pd-bone md:px-12 md:pb-32 md:pt-48">
       <div className="grid gap-16 lg:grid-cols-12">
         <div className="lg:sticky lg:top-32 lg:col-span-6 lg:self-start">
           <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-black leading-[0.85] tracking-[-0.045em]">

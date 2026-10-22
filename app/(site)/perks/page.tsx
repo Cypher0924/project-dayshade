@@ -41,7 +41,7 @@ const PLAY = [
 
 export default function PerksPage() {
   return (
-    <div className="bg-pd-black text-pd-bone">
+    <div className="text-pd-bone">
       <header className="grid gap-12 px-5 pb-24 pt-36 md:grid-cols-12 md:items-end md:px-12 md:pb-32 md:pt-48">
         <div className="md:col-span-7">
           <h1 className="text-[clamp(3.5rem,9vw,9rem)] font-black leading-[0.85] tracking-[-0.045em]">

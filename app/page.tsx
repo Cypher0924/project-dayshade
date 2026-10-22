@@ -15,7 +15,7 @@ export default async function Page() {
   ]);
 
   return (
-    <div className="bg-pd-black text-pd-bone">
+    <div className="text-pd-bone">
       <HomeHero />
       <Teams />
       {showcase && <MonthlyShowcase project={showcase} />}

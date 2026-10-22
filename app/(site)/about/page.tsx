@@ -11,7 +11,7 @@ import FormerMembersSection from "@/components/sections/about/former-members-sec
 
 export default function About() {
   return (
-    <div className="relative bg-pd-black text-pd-bone">
+    <div className="relative text-pd-bone">
       <HeroSection />
 
       {/* Panel 2 */}
