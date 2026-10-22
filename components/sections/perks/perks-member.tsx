@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ArrowRight, Info } from "lucide-react";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { motion, LazyMotion, domAnimation } from "motion/react";
 
 function PerksMember() {
   return (

@@ -6,7 +6,7 @@ import { GlassContainer } from "@/components/shared/glass-container";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function HeroSection() {
   return (

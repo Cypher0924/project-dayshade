@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { PillLink } from "@/components/shared/pill-link";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, OrthographicCamera } from "@react-three/drei";
 import { PDLogo } from "@/components/shared/pd-logo";
@@ -92,18 +92,8 @@ export default function HomeHero() {
             practices in design and development.
           </p>
           <div className="hero-fade flex flex-wrap gap-3">
-            <Link
-              href="/join"
-              className="inline-flex h-14 items-center rounded-full bg-pd-green px-8 text-lg font-bold text-pd-black transition-colors duration-200 hover:bg-pd-bone focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pd-green"
-            >
-              Join the Den
-            </Link>
-            <a
-              href="#projects"
-              className="inline-flex h-14 items-center rounded-full border border-white/25 px-8 text-lg font-semibold text-pd-bone transition-colors duration-200 hover:border-pd-bone focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pd-green"
-            >
-              See member projects
-            </a>
+            <PillLink href="/join">Join the Den</PillLink>
+            <PillLink href="#projects" variant="secondary">See member projects</PillLink>
           </div>
         </div>
       </div>

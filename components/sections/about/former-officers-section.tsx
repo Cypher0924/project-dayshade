@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { formerOfficersByYear, availableOfficerYears, FormerOfficer } from "@/lib/constants/former-officers";
 import TeamMemberCard from "@/components/sections/about/team-member-card";
 import {

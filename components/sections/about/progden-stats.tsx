@@ -5,7 +5,7 @@ import React from "react";
 import { GlassContainer } from "@/components/shared/glass-container";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function ProgdenStats() {
   const stats = {

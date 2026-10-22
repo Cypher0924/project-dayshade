@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Calendar, ChevronLeft, ChevronRight, Trophy } from "lucide-react";
 import { Jost } from "next/font/google";
 import Image from "next/image";

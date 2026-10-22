@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { motion, LazyMotion, domAnimation } from "motion/react";
 
 const MotionCard = motion(Card);
 

@@ -5,7 +5,7 @@ import React from 'react'
 import { Button } from "@/components/ui/button";
 import { GlassContainer } from '@/components/shared/glass-container'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { motion, LazyMotion, domAnimation } from "motion/react";
 import Link from 'next/link';
 
 export default function SignUp() {

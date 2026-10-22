@@ -37,7 +37,7 @@ export function MonthlyShowcase({ project }: { project: ShowcaseProject }) {
       <div className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-3 text-lg font-semibold text-pd-green">Project of the month</p>
-          <h2 className="max-w-[16ch] text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.035em] text-pd-bone">
+          <h2 className="max-w-[16ch] text-display text-pd-bone">
             {project.title}
           </h2>
         </div>

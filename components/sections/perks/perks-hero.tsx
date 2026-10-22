@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { motion, LazyMotion, domAnimation } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
 function PerksHero() {

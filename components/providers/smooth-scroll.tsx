@@ -5,6 +5,14 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
+let activeLenis: Lenis | null = null;
+
+/** Smoothly scrolls to the top, through Lenis when it is running. */
+export function scrollToTop() {
+  if (activeLenis) activeLenis.scrollTo(0);
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
@@ -20,6 +28,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       prevent: (node) => !!node.closest('[role="dialog"], [data-lenis-prevent]'),
     });
     lenisRef.current = lenis;
+    activeLenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);
@@ -30,6 +39,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
+      activeLenis = null;
     };
   }, []);
 

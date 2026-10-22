@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "motion/react";
 import CategoryFilter, { type ProductCategory } from "./category-filter";
 import ProductCard from "./product-card";
 import CatalogCarousel from "./catalog-carousel";

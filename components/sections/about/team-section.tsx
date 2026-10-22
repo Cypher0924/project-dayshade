@@ -7,7 +7,7 @@ import { Dialog, DialogTitle, DialogTrigger, DialogClose, DialogFooter, DialogCo
 import MembersModal from './members-modal'
 import TeamMemberCard from './team-member-card'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 export default function TeamSection() {
 

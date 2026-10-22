@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { PillLink } from "@/components/shared/pill-link";
 import { ArrowUpRight } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 
@@ -33,7 +33,7 @@ export default function JoinCta() {
 
   return (
     <section ref={root} className="overflow-hidden border-t border-white/10 px-5 pb-24 pt-24 md:px-12 md:pt-40">
-      <h2 className="cta-title text-[clamp(4rem,15vw,15rem)] font-black leading-[0.82] tracking-[-0.05em] text-pd-bone">
+      <h2 className="cta-title text-display-xl text-pd-bone">
         Join the Den.
       </h2>
 
@@ -43,18 +43,8 @@ export default function JoinCta() {
             All Red Hawks are welcome. Sign up, pick a team, and start building with us.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/join"
-              className="inline-flex h-14 items-center rounded-full bg-pd-green px-8 text-lg font-bold text-pd-black transition-colors duration-200 hover:bg-pd-bone focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pd-green"
-            >
-              Sign up
-            </Link>
-            <Link
-              href="/about"
-              className="inline-flex h-14 items-center rounded-full border border-white/25 px-8 text-lg font-semibold text-pd-bone transition-colors duration-200 hover:border-pd-bone focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pd-green"
-            >
-              About the Den
-            </Link>
+            <PillLink href="/join">Sign up</PillLink>
+            <PillLink href="/about" variant="secondary">About the Den</PillLink>
           </div>
         </div>
 

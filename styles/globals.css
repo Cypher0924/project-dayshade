@@ -132,6 +132,21 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Display headings shared across the redesigned pages. */
+@utility text-display {
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+@utility text-display-xl {
+  font-size: clamp(4rem, 15vw, 15rem);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

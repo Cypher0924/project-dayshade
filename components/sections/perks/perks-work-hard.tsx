@@ -11,7 +11,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { motion, LazyMotion, domAnimation } from "motion/react";
 import Autoplay from "embla-carousel-autoplay";
 
 function PerksWorkHard() {

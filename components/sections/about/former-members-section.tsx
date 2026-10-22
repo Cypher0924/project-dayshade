@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { formerMembersData, FormerMember } from "@/lib/constants/former-members";
 import { GlassContainer } from "@/components/shared/glass-container";
 import { Badge } from "@/components/ui/badge";
