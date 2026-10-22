@@ -159,6 +159,29 @@
 }
 
 @layer components {
+  /* Site background: PD monogram pattern as a mask, lit by a cursor glow (see SiteBackground). */
+  .site-pattern {
+    --mx: -1000;
+    --my: -1000;
+    --py: 0;
+    --glow: 0;
+    background:
+      radial-gradient(
+        circle 340px at calc(var(--mx) * 1px) calc(var(--my) * 1px),
+        rgb(74 238 152 / calc(0.24 * var(--glow))),
+        transparent 70%
+      ),
+      rgb(255 255 255 / 0.03);
+    -webkit-mask-image: url(/assets/pattern-mask.webp);
+    mask-image: url(/assets/pattern-mask.webp);
+    -webkit-mask-size: max(1200px, 100%) auto;
+    mask-size: max(1200px, 100%) auto;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: 50% calc(var(--py) * 1px);
+    mask-position: 50% calc(var(--py) * 1px);
+  }
+
   .glass-card {
     @apply backdrop-blur-sm border shadow-xl rounded-lg;
     @apply transition-all duration-300 ease-in-out;
