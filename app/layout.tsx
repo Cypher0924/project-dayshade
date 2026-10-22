@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Jost, League_Spartan } from "next/font/google";
 import "@/styles/globals.css";
 import LayoutWrapper from "@/components/layout/layout-wrapper";
 import { Toaster } from "@/components/ui/sonner";
@@ -11,9 +11,22 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const leagueSpartan = League_Spartan({
+  subsets: ["latin"],
+  variable: "--font-league-spartan",
+  display: "swap",
+});
+
+const jost = Jost({
+  subsets: ["latin"],
+  variable: "--font-jost-face",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Programmers' Den",
   description: "A community for programmers to share and learn.",
+  icons: { icon: "/assets/pd-logo.png" },
   keywords: [
     "programming",
     "community",
@@ -62,10 +75,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${jetbrainsMono.variable}`}>
-        <head>
-          <link rel="icon" href="/assets/pd-logo.png" />
-        </head>
+      <body
+        className={`antialiased ${leagueSpartan.variable} ${jost.variable} ${jetbrainsMono.variable}`}
+      >
         <LayoutWrapper>{children}</LayoutWrapper>
         <Toaster richColors />
       </body>

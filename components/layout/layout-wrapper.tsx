@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Footer from "@/components/layout/footer";
 import { NavbarDemo } from "@/components/layout/header";
+import SmoothScroll from "@/components/providers/smooth-scroll";
 
 export default function LayoutWrapper({
   children,
@@ -13,11 +14,15 @@ export default function LayoutWrapper({
   const hideNavAndFooter =
     pathname.startsWith("/admin") || pathname.startsWith("/login");
 
+  if (hideNavAndFooter) {
+    return <main className="min-h-screen">{children}</main>;
+  }
+
   return (
-    <>
-      {!hideNavAndFooter && <NavbarDemo />}
+    <SmoothScroll>
+      <NavbarDemo />
       <main className="min-h-screen">{children}</main>
-      {!hideNavAndFooter && <Footer />}
-    </>
+      <Footer />
+    </SmoothScroll>
   );
 }

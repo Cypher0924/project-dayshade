@@ -1,98 +1,90 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Facebook, Mail, Youtube } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
+import Image from "next/image";
+import Link from "next/link";
+
+const COLUMNS = [
+  {
+    label: "Browse",
+    links: [
+      { name: "Home", href: "/" },
+      { name: "About", href: "/about" },
+      { name: "Events", href: "/events" },
+      { name: "Projects", href: "/projects" },
+      { name: "Shop", href: "/shop" },
+    ],
+  },
+  {
+    label: "Apply",
+    links: [
+      { name: "Perks", href: "/perks" },
+      { name: "Register", href: "/join" },
+    ],
+  },
+  {
+    label: "Contact",
+    links: [
+      { name: "Facebook", href: "https://www.facebook.com/ccsprogrammersden" },
+      { name: "YouTube", href: "https://www.youtube.com/@ccsprogrammersden3712" },
+      { name: "Discord", href: "https://discord.gg/bTXvdggz4g" },
+      { name: "Email", href: "mailto:progdenofficial@gmail.com" },
+    ],
+  },
+];
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#363636] text-white px-4 md:px-8 lg:px-16 ">
-
-      <div className="max-w-7xl mx-auto py-8">
-        <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-16 lg:gap-24">
-          {/* Left Section: Logo, Description, Socials */}
-          <div className="flex flex-col gap-4 md:w-1/2 lg:w-2/5">
-            <div className="flex items-center">
-              <Image src="/assets/pd-logo-sm.png" alt="Programmers Den Logo" width={40} height={40} className="h-10 w-10" />
-              <Image
-                src="/assets/pd-banner.png"
-                alt="Programmers Den Banner"
-                width={200}
-                height={30}
-                className="h-auto w-48"
-              />
-            </div>
-            <p className="text-sm md:text-lg text-gray-300 max-w-md">
-              The computer technology-focused college organization preparing students for industry practices in Design and Development
-            </p>
-            <div className="flex gap-4 mt-2">
-              <Link href="https://www.facebook.com/ccsprogrammersden" target="_blank" className="text-gray-300 hover:text-pd-purple transition-colors">
-                <Facebook className="h-6 w-6" />
-              </Link>
-              <Link href="mailto:progdenofficial@gmail.com" className="text-gray-300 hover:text-pd-purple transition-colors">
-                <Mail className="h-6 w-6" />
-              </Link>
-              <Link href="https://www.youtube.com/@ccsprogrammersden3712" target="_blank" className="text-gray-300 hover:text-pd-purple transition-colors">
-                <Youtube className="h-6 w-6" />
-              </Link>
-            </div>
+    <footer className="relative overflow-hidden border-t border-white/10 bg-pd-black text-pd-bone">
+      <div className="grid gap-12 px-5 pb-10 pt-16 md:grid-cols-12 md:px-12 md:pt-24">
+        <div className="md:col-span-5">
+          <div className="flex items-center gap-2">
+            <Image src="/assets/pd-logo-sm.png" alt="" width={40} height={40} className="size-10" />
+            <Image
+              src="/assets/pd-banner.png"
+              alt="Programmers' Den"
+              width={200}
+              height={30}
+              className="h-auto w-48"
+            />
           </div>
-
-          {/* Browse and Apply */}
-          <div className="grid grid-cols-2 gap-8 md:gap-16 lg:gap-24 md:w-1/2 lg:w-3/5">
-            {/* Browse Section */}
-            <div>
-              <h3 className="text-lg md:text-3xl font-bold mb-4">Browse</h3>
-              <ul className="space-y-2 text-sm md:text-lg text-gray-300">
-                <li>
-                  <Link href="/" className="hover:text-pd-purple transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="hover:text-pd-purple transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/events" className="hover:text-pd-purple transition-colors">
-                    Events
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/projects" className="hover:text-pd-purple transition-colors">
-                    Projects
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Apply Section */}
-            <div>
-              <h3 className="text-lg md:text-3xl font-bold mb-4">Apply</h3>
-              <ul className="space-y-2 text-sm md:text-lg text-gray-300">
-                <li>
-                  <Link href="/perks" className="hover:text-pd-purple transition-colors">
-                    Perks
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/join" className="hover:text-pd-purple transition-colors">
-                    Register
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <p className="mt-6 max-w-sm text-lg leading-snug text-pd-bone/65">
+            The computer technology-focused college organization preparing students for industry
+            practices in design and development.
+          </p>
         </div>
 
-        <Separator className="my-4" />
-
-        {/* Bottom Section: University and Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm md:text-lg text-gray-400 gap-2">
-          <span>Tarlac State University | College of Computer Studies</span>
-          <span>Programmers&apos; Den &copy; 2025</span>
-        </div>
+        {COLUMNS.map((col) => (
+          <nav key={col.label} aria-label={col.label} className="md:col-span-2 last:md:col-span-3">
+            <p className="mb-4 text-pd-light-grey">{col.label}</p>
+            <ul className="space-y-2 text-lg">
+              {col.links.map((l) => {
+                const external = l.href.startsWith("http");
+                return (
+                  <li key={l.name}>
+                    <Link
+                      href={l.href}
+                      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+                      className="transition-colors duration-200 hover:text-pd-green"
+                    >
+                      {l.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        ))}
       </div>
+
+      <div className="flex flex-col gap-2 border-t border-white/10 px-5 py-6 text-pd-light-grey md:flex-row md:justify-between md:px-12">
+        <span>Tarlac State University, College of Computer Studies</span>
+        <span>Programmers&apos; Den &copy; {new Date().getFullYear()}</span>
+      </div>
+
+      <p
+        aria-hidden="true"
+        className="pointer-events-none select-none whitespace-nowrap px-3 text-[27.5vw] font-black lowercase leading-[0.72] tracking-[-0.06em] text-white/[0.05]"
+      >
+        progden
+      </p>
     </footer>
-  )
+  );
 }
