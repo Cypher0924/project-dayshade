@@ -130,6 +130,13 @@
   --color-pd-banner-bottom: #0e0e10;
   --color-pd-bone: #ececec;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Terminal cursor: fully on, then fully off. */
+  --animate-blink: blink 1.06s steps(1, end) infinite;
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 /* Page side padding: 20px on phones, 48px from tablets, then it grows so content stays within 1680px. */

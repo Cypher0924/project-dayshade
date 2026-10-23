@@ -80,7 +80,7 @@ export default function HomeHero() {
                 {line}
               </span>
               {i === LINES.length - 1 && (
-                <span className="ml-[0.06em] inline-block h-[0.62em] w-[0.3em] translate-y-[0.02em] animate-pulse bg-pd-green motion-reduce:animate-none" />
+                <span className="ml-[0.06em] inline-block h-[0.62em] w-[0.3em] translate-y-[0.02em] animate-blink bg-pd-green motion-reduce:animate-none" />
               )}
             </span>
           ))}
