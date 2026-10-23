@@ -40,7 +40,7 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
   );
 
   return (
-    <section className="border-t border-white/10 px-page py-24 md:py-32">
+    <section className="px-page py-24 md:py-32">
       <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <h2 className="text-display">All projects</h2>
         <p className="text-lg text-pd-bone/60" aria-live="polite">

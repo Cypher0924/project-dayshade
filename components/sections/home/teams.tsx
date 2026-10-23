@@ -37,11 +37,11 @@ export default function Teams() {
   return (
     <section
       ref={root}
-      className="grid gap-10 border-t border-white/10 px-page py-24 md:grid-cols-12 md:py-40"
+      className="grid gap-10 px-page py-24 md:grid-cols-12 md:py-40"
     >
-      <h2 className="text-2xl font-semibold leading-tight text-pd-bone md:sticky md:top-32 md:col-span-4 md:self-start md:text-3xl">
+      <p className="text-2xl font-semibold leading-tight text-pd-bone md:sticky md:top-32 md:col-span-4 md:self-start md:text-3xl">
         Four teams under one roof. Pick the one that fits how you like to build.
-      </h2>
+      </p>
       <ul className="md:col-span-8">
         {TEAMS.map((team) => (
           <li

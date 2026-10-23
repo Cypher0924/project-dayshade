@@ -64,11 +64,11 @@ export default function PerksPage() {
         />
       </header>
 
-      <section aria-label="Perks" className="border-t border-white/10">
+      <section aria-label="Perks">
         {PERKS.map((perk, i) => (
           <article
             key={perk.title}
-            className="grid items-center gap-10 border-b border-white/10 px-page py-20 md:grid-cols-12 md:py-28"
+            className="grid items-center gap-10 px-page py-20 md:grid-cols-12 md:py-28"
           >
             <ClipReveal className={cn("md:col-span-5", i % 2 === 1 && "md:order-2 md:col-start-8")}>
               <Image
@@ -76,8 +76,8 @@ export default function PerksPage() {
                 alt={perk.image.alt}
                 width={perk.image.width}
                 height={perk.image.height}
-                sizes="(min-width: 768px) 40vw, 100vw"
-                className="w-full max-w-[560px] rounded-[28px]"
+                sizes="(min-width: 768px) 720px, 100vw"
+                className="aspect-[4/3] w-full rounded-[28px] object-cover"
               />
             </ClipReveal>
             <div className={cn("md:col-span-6", i % 2 === 0 ? "md:col-start-7" : "md:order-1")}>
@@ -100,15 +100,15 @@ export default function PerksPage() {
             We celebrate gaming too. Team-building activities that grow teamwork and healthy competition.
           </p>
         </div>
-        <ul className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-page pb-4 [scrollbar-color:rgb(255_255_255/0.25)_transparent] [scrollbar-width:thin]">
+        <ul className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-page pb-4 md:grid md:snap-none md:grid-cols-3 md:overflow-visible [scrollbar-color:rgb(255_255_255/0.25)_transparent] [scrollbar-width:thin]">
           {PLAY.map((img) => (
-            <li key={img.src} className="shrink-0 snap-start">
+            <li key={img.src} className="shrink-0 snap-start md:shrink">
               <Image
                 src={img.src}
                 alt={img.alt}
                 width={img.width}
                 height={271}
-                className="h-[220px] w-auto rounded-[20px] md:h-[271px]"
+                className="h-[220px] w-auto rounded-[20px] md:aspect-[9/5] md:h-auto md:w-full md:object-cover"
               />
             </li>
           ))}

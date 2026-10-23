@@ -38,7 +38,7 @@ export default function About() {
 
       <FormerMembersSection />
 
-      <div className="border-t border-white/10 px-page pt-24 text-center">
+      <div className="px-page pt-24 text-center">
         <h2 className="text-display">Our impact</h2>
         <p className="mt-4 text-lg text-pd-bone/65">Growing stronger every year</p>
       </div>

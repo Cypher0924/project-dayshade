@@ -32,7 +32,7 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-pd-black text-pd-bone">
+    <footer className="relative overflow-hidden bg-pd-black text-pd-bone">
       <div className="grid gap-12 px-page pb-10 pt-16 md:grid-cols-12 md:pt-24">
         <div className="md:col-span-5">
           <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="flex flex-col gap-2 border-t border-white/10 px-page py-6 text-pd-light-grey md:flex-row md:justify-between">
+      <div className="flex flex-col gap-2 px-page py-6 text-pd-light-grey md:flex-row md:justify-between">
         <span>Tarlac State University, College of Computer Studies</span>
         <span>Programmers&apos; Den &copy; {new Date().getFullYear()}</span>
       </div>

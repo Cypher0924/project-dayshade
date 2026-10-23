@@ -33,7 +33,7 @@ export function MonthlyShowcase({ project }: { project: ShowcaseProject }) {
   );
 
   return (
-    <section ref={root} className="border-t border-white/10 px-page py-24 md:py-32">
+    <section ref={root} className="px-page py-24 md:py-32">
       <div className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-3 text-lg font-semibold text-pd-green">Project of the month</p>

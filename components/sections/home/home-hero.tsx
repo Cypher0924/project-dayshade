@@ -58,7 +58,7 @@ export default function HomeHero() {
       ref={root}
       className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-page pb-12 pt-32 md:pb-16"
     >
-      <div className="hero-logo pointer-events-none absolute -right-[20%] top-[6%] aspect-square w-[95vw] opacity-90 md:pointer-events-auto md:-right-[4%] md:top-[4%] md:w-[52vw] lg:w-[min(46vw,760px)]">
+      <div className="hero-logo pointer-events-none absolute -right-[20%] top-[6%] aspect-square w-[95vw] opacity-90 md:pointer-events-auto md:right-[calc(var(--gutter)_-_4vw)] md:top-[4%] md:w-[52vw] lg:w-[min(46vw,760px)]">
         <Canvas className="h-full w-full">
           <OrthographicCamera makeDefault position={[0, 5, 120]} zoom={56} near={0.1} far={1000} />
           <OrbitControls enableZoom={false} enablePan={false} />
@@ -86,7 +86,7 @@ export default function HomeHero() {
           ))}
         </h1>
 
-        <div className="mt-10 flex flex-col gap-8 md:mt-14 md:flex-row md:items-end md:justify-between">
+        <div className="mt-10 flex flex-col items-start gap-8 md:mt-12">
           <p className="hero-fade max-w-md text-lg leading-snug text-pd-bone/70 md:text-xl">
             The computer technology-focused college organization preparing students for industry
             practices in design and development.
