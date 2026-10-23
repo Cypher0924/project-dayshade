@@ -32,7 +32,7 @@ export default function JoinCta() {
   );
 
   return (
-    <section ref={root} className="overflow-hidden border-t border-white/10 px-5 pb-24 pt-24 md:px-12 md:pt-40">
+    <section ref={root} className="overflow-hidden border-t border-white/10 px-page pb-24 pt-24 md:pt-40">
       <h2 className="cta-title text-display-xl text-pd-bone">
         Join the Den.
       </h2>

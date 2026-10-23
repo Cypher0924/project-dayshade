@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
 
   return (
     <div className="text-pd-bone">
-      <header className="px-5 pb-16 pt-36 md:px-12 md:pb-24 md:pt-48">
+      <header className="px-page pb-16 pt-36 md:pb-24 md:pt-48">
         <h1 className="text-display-xl">Projects</h1>
         <p className="mt-8 max-w-xl text-xl leading-snug text-pd-bone/70">
           Apps, games and multimedia work built by Den members, newest first.

@@ -123,7 +123,7 @@
   --color-pd-green: #4aee98;
   --color-pd-green-accent: #67ffaf;
   --color-pd-dark-grey: #39393b;
-  --color-pd-light-grey: #787878;
+  --color-pd-light-grey: #8a8a8a;
   --color-pd-black: #191919;
   --color-pd-banner-top: #38383f;
   --color-pd-banner-mid: #222226;
@@ -132,19 +132,33 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Page side padding: 20px on phones, 48px from tablets, then it grows so content stays within 1680px. */
+:root {
+  --gutter: 1.25rem;
+}
+@media (width >= 48rem) {
+  :root {
+    --gutter: max(3rem, calc((100vw - 105rem) / 2));
+  }
+}
+
+@utility px-page {
+  padding-inline: var(--gutter);
+}
+
 /* Display headings shared across the redesigned pages. */
 @utility text-display {
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.035em;
 }
 
 @utility text-display-xl {
-  font-size: clamp(4rem, 15vw, 15rem);
+  font-size: clamp(4rem, 10vw, 8.5rem);
   font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.05em;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
 }
 
 @layer base {
@@ -238,7 +252,7 @@
     background-color: rgba(204, 204, 204, 0.4);
   }
   .pd-nav-body[data-tone="dark"] {
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(25, 25, 25, 0.82);
     --pd-nav-edge:
       inset 1px 1px 0 rgba(255, 255, 255, 0.14),
       inset -1px -1px 0 rgba(255, 255, 255, 0.03);

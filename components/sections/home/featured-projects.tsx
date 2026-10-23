@@ -42,7 +42,7 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
       id="projects"
       className="overflow-hidden border-t border-white/10 py-24 md:flex md:h-[100svh] md:flex-col md:justify-center md:py-0"
     >
-      <div className="mb-10 flex items-end justify-between gap-6 px-5 md:px-12">
+      <div className="mb-10 flex items-end justify-between gap-6 px-page">
         <h2 className="text-display text-pd-bone">
           Built by members
         </h2>
@@ -56,7 +56,7 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
 
       <div
         ref={track}
-        className="flex flex-col gap-12 px-5 md:w-max md:flex-row md:gap-8 md:px-12"
+        className="flex flex-col gap-12 px-page md:w-max md:flex-row md:gap-8"
       >
         {projects.map((project) => (
           <ProjectCard

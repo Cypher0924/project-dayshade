@@ -42,9 +42,9 @@ const PLAY = [
 export default function PerksPage() {
   return (
     <div className="text-pd-bone">
-      <header className="grid gap-12 px-5 pb-24 pt-36 md:grid-cols-12 md:items-end md:px-12 md:pb-32 md:pt-48">
+      <header className="grid gap-12 px-page pb-24 pt-36 md:grid-cols-12 md:items-end md:pb-32 md:pt-48">
         <div className="md:col-span-7">
-          <h1 className="text-[clamp(3.5rem,9vw,9rem)] font-black leading-[0.85] tracking-[-0.045em]">
+          <h1 className="text-[clamp(3.25rem,7vw,7rem)] font-black leading-[0.85] tracking-[-0.045em]">
             Membership perks
           </h1>
           <p className="mt-8 max-w-lg text-xl leading-snug text-pd-bone/70">
@@ -68,7 +68,7 @@ export default function PerksPage() {
         {PERKS.map((perk, i) => (
           <article
             key={perk.title}
-            className="grid items-center gap-10 border-b border-white/10 px-5 py-20 md:grid-cols-12 md:px-12 md:py-28"
+            className="grid items-center gap-10 border-b border-white/10 px-page py-20 md:grid-cols-12 md:py-28"
           >
             <ClipReveal className={cn("md:col-span-5", i % 2 === 1 && "md:order-2 md:col-start-8")}>
               <Image
@@ -94,13 +94,13 @@ export default function PerksPage() {
       </section>
 
       <section className="py-24 md:py-32">
-        <div className="px-5 md:px-12">
+        <div className="px-page">
           <h2 className="text-display">Work hard. Play hard.</h2>
           <p className="mt-6 max-w-xl text-lg leading-snug text-pd-bone/70 md:text-xl">
             We celebrate gaming too. Team-building activities that grow teamwork and healthy competition.
           </p>
         </div>
-        <ul className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-4 md:px-12 [scrollbar-color:rgb(255_255_255/0.25)_transparent] [scrollbar-width:thin]">
+        <ul className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-page pb-4 [scrollbar-color:rgb(255_255_255/0.25)_transparent] [scrollbar-width:thin]">
           {PLAY.map((img) => (
             <li key={img.src} className="shrink-0 snap-start">
               <Image

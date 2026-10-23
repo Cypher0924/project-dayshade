@@ -56,9 +56,9 @@ export default function HomeHero() {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-5 pb-12 pt-32 md:px-12 md:pb-16"
+      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-page pb-12 pt-32 md:pb-16"
     >
-      <div className="hero-logo pointer-events-none absolute -right-[20%] top-[6%] aspect-square w-[95vw] opacity-90 md:pointer-events-auto md:-right-[4%] md:top-[4%] md:w-[52vw] lg:w-[46vw]">
+      <div className="hero-logo pointer-events-none absolute -right-[20%] top-[6%] aspect-square w-[95vw] opacity-90 md:pointer-events-auto md:-right-[4%] md:top-[4%] md:w-[52vw] lg:w-[min(46vw,760px)]">
         <Canvas className="h-full w-full">
           <OrthographicCamera makeDefault position={[0, 5, 120]} zoom={56} near={0.1} far={1000} />
           <OrbitControls enableZoom={false} enablePan={false} />
@@ -72,7 +72,7 @@ export default function HomeHero() {
           CCS Programmers&apos; Den, Tarlac State University
         </p>
 
-        <h1 className="text-[clamp(3.25rem,11.5vw,12rem)] font-black lowercase leading-[0.84] tracking-[-0.045em] text-pd-bone">
+        <h1 className="text-[clamp(3.25rem,9.5vw,9.5rem)] font-black lowercase leading-[0.84] tracking-[-0.045em] text-pd-bone">
           <span className="sr-only">{LINES.join(" ")}</span>
           {LINES.map((line, i) => (
             <span key={line} aria-hidden="true" className="block">

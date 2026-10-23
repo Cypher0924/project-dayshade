@@ -10,12 +10,12 @@ export default async function ShopPage() {
     return (
         <>
             {/* Hero Section */}
-            <div className="flex flex-col items-center w-full px-4 md:px-12 pt-20 lg:pt-24 pb-12 gap-8 md:gap-12 bg-[linear-gradient(180deg,rgba(178,82,234,0)_0%,rgba(178,82,234,0.098)_26.44%,rgba(178,82,234,0.378)_51.44%,rgba(74,238,152,0.7)_98.08%)]">
+            <div className="flex flex-col items-center w-full px-page pt-20 lg:pt-24 pb-12 gap-8 md:gap-12 bg-[linear-gradient(180deg,rgba(178,82,234,0)_0%,rgba(178,82,234,0.098)_26.44%,rgba(178,82,234,0.378)_51.44%,rgba(74,238,152,0.7)_98.08%)]">
                 <FeaturedCard />
             </div>
 
             {/* Products Section */}
-            <div className="relative w-full overflow-hidden min-h-screen px-4 md:px-12 py-16 lg:py-24">
+            <div className="relative w-full overflow-hidden min-h-screen px-page py-16 lg:py-24">
                 {/* Background Gradients */}
                 <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
                     {/* Primary Glow */}

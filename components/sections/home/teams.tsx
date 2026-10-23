@@ -37,7 +37,7 @@ export default function Teams() {
   return (
     <section
       ref={root}
-      className="grid gap-10 border-t border-white/10 px-5 py-24 md:grid-cols-12 md:px-12 md:py-40"
+      className="grid gap-10 border-t border-white/10 px-page py-24 md:grid-cols-12 md:py-40"
     >
       <h2 className="text-2xl font-semibold leading-tight text-pd-bone md:sticky md:top-32 md:col-span-4 md:self-start md:text-3xl">
         Four teams under one roof. Pick the one that fits how you like to build.
@@ -46,7 +46,7 @@ export default function Teams() {
         {TEAMS.map((team) => (
           <li
             key={team}
-            className="team-row border-b border-white/10 py-4 text-[clamp(2.25rem,6.5vw,6rem)] font-extrabold leading-[0.95] tracking-[-0.035em] text-pd-bone first:pt-0"
+            className="team-row border-b border-white/10 py-4 text-[clamp(2rem,4.5vw,4rem)] font-extrabold leading-[0.95] tracking-[-0.035em] text-pd-bone first:pt-0"
           >
             {team}
           </li>

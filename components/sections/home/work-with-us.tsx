@@ -15,7 +15,7 @@ const REASONS = [
 
 export default function WhyJoin() {
   return (
-    <section className="grid gap-12 border-t border-white/10 px-5 py-24 md:grid-cols-12 md:px-12 md:py-40">
+    <section className="grid gap-12 border-t border-white/10 px-page py-24 md:grid-cols-12 md:py-40">
       <h2 className="text-display text-pd-bone md:col-span-5">
         Learn the way the industry works.
       </h2>

@@ -21,10 +21,10 @@ const STATS = [
 
 export default function JoinPage() {
   return (
-    <div className="px-5 pb-24 pt-36 text-pd-bone md:px-12 md:pb-32 md:pt-48">
+    <div className="px-page pb-24 pt-36 text-pd-bone md:pb-32 md:pt-48">
       <div className="grid gap-16 lg:grid-cols-12">
         <div className="lg:sticky lg:top-32 lg:col-span-6 lg:self-start">
-          <h1 className="text-[clamp(3.5rem,9vw,8.5rem)] font-black leading-[0.85] tracking-[-0.045em]">
+          <h1 className="text-[clamp(3.25rem,7vw,7rem)] font-black leading-[0.85] tracking-[-0.045em]">
             Join the Den.
           </h1>
           <p className="mt-8 max-w-lg text-xl leading-snug text-pd-bone/70">

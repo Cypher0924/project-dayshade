@@ -139,7 +139,7 @@ export const formerOfficersByYear: Record<string, FormerOfficer[]> = {
       id: 13,
       name: "Mharl Vincent Aquilos",
       title: "Social Media Manager",
-      image: "/assets/profile/socmed-manager-mharl.png",
+      image: "/assets/profile/socmed-manager-mharl.jpg",
       socials: {
         github: "https://github.com/danimaaru",
         email: "mharlvincentaguilos@gmail.com",
