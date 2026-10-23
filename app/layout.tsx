@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Jost, League_Spartan } from "next/font/google";
+import { JetBrains_Mono, League_Spartan } from "next/font/google";
 import "@/styles/globals.css";
 import LayoutWrapper from "@/components/layout/layout-wrapper";
 import { Toaster } from "@/components/ui/sonner";
@@ -17,11 +17,6 @@ const leagueSpartan = League_Spartan({
   display: "swap",
 });
 
-const jost = Jost({
-  subsets: ["latin"],
-  variable: "--font-jost-face",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Programmers' Den",
@@ -76,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased ${leagueSpartan.variable} ${jost.variable} ${jetbrainsMono.variable}`}
+        className={`antialiased ${leagueSpartan.variable} ${jetbrainsMono.variable}`}
       >
         <LayoutWrapper>{children}</LayoutWrapper>
         <Toaster richColors />
