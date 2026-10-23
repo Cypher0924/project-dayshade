@@ -7,7 +7,7 @@ import { Environment, OrbitControls, OrthographicCamera } from "@react-three/dre
 import { PDLogo } from "@/components/shared/pd-logo";
 import { gsap, useGSAP } from "@/lib/gsap";
 
-const LINES = ["where great", "minds compile."];
+const LINES = ["pushing the limits", "and committing", "to improvement."];
 
 export default function HomeHero() {
   const root = useRef<HTMLElement>(null);
@@ -72,7 +72,7 @@ export default function HomeHero() {
           CCS Programmers&apos; Den, Tarlac State University
         </p>
 
-        <h1 className="text-[clamp(3.25rem,9.5vw,9.5rem)] font-black lowercase leading-[0.84] tracking-[-0.045em] text-pd-bone">
+        <h1 className="text-[clamp(2.6rem,6.75vw,8.5rem)] font-black lowercase leading-[0.84] tracking-[-0.045em] text-pd-bone">
           <span className="sr-only">{LINES.join(" ")}</span>
           {LINES.map((line, i) => (
             <span key={line} aria-hidden="true" className="block">
