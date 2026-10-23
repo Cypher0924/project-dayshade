@@ -1,132 +1,91 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { formerMembersData, FormerMember } from "@/lib/constants/former-members";
-import { GlassContainer } from "@/components/shared/glass-container";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Search, Users, Calendar, Award } from "lucide-react";
+import { useMemo, useState } from "react";
+import { formerMembersData } from "@/lib/constants/former-members";
+import { cn } from "@/lib/utils";
 
-const TEAMS = [
-  "All",
-  "Web & App Development",
-  "Game Development",
-  "Competitive Programming",
-  "Multimedia",
-] as const;
+const TEAMS = ["All", "Web & App Development", "Game Development", "Competitive Programming", "Multimedia"] as const;
 
 export default function FormerMembersSection() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTeam, setSelectedTeam] = useState<string>("All");
 
   const filteredMembers = useMemo(() => {
+    const q = searchQuery.toLowerCase();
     return formerMembersData.filter((member) => {
       const matchesSearch =
-        member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (member.role &&
-          member.role.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        member.batchYear.toLowerCase().includes(searchQuery.toLowerCase());
-
-      const matchesTeam =
-        selectedTeam === "All" || member.team === selectedTeam;
-
+        member.name.toLowerCase().includes(q) ||
+        (member.role && member.role.toLowerCase().includes(q)) ||
+        member.batchYear.toLowerCase().includes(q);
+      const matchesTeam = selectedTeam === "All" || member.team === selectedTeam;
       return matchesSearch && matchesTeam;
     });
   }, [searchQuery, selectedTeam]);
 
   return (
-    <section className="py-12 px-4 md:px-8 relative w-full">
-      <div className="max-w-5xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-pd-green tracking-tight mb-2">
-            Former Members
-          </h2>
-          <p className="text-zinc-400 text-sm md:text-base max-w-xl mx-auto">
-            Honoring our alumni and former active members who contributed to
-            the success of Programmers' Den.
+    <section className="px-page py-24 md:py-32">
+      <div className="grid gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <h2 className="text-display">Former members</h2>
+          <p className="mt-6 max-w-sm text-lg leading-snug text-pd-bone/65">
+            Honoring the alumni and former members who helped build Programmers&apos; Den.
           </p>
         </div>
 
-        {/* Scrollable Container with Horizontal Dividing Lines */}
-        <GlassContainer className="bg-zinc-950/60 border border-zinc-800/80 rounded-2xl p-0 overflow-hidden shadow-2xl">
+        <div className="lg:col-span-8">
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by name, role or batch"
+            aria-label="Search former members"
+            className="h-12 w-full rounded-full border border-white/20 bg-transparent px-5 text-base text-pd-bone placeholder:text-pd-light-grey focus:border-pd-green focus:outline-none"
+          />
+          <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by team">
+            {TEAMS.map((team) => (
+              <button
+                key={team}
+                type="button"
+                aria-pressed={team === selectedTeam}
+                onClick={() => setSelectedTeam(team)}
+                className={cn(
+                  "h-9 rounded-full border px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pd-green",
+                  team === selectedTeam
+                    ? "border-pd-green bg-pd-green text-pd-black"
+                    : "border-white/20 text-pd-bone hover:border-pd-bone"
+                )}
+              >
+                {team}
+              </button>
+            ))}
+          </div>
 
-          {/* Scrollable List Container (media_1790778197433.png: list with horizontal dividing lines) */}
-          <div data-lenis-prevent className="max-h-[380px] overflow-y-auto divide-y divide-zinc-800/80 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+          <p className="mt-8 text-pd-light-grey" aria-live="polite">
+            {filteredMembers.length} {filteredMembers.length === 1 ? "member" : "members"}
+          </p>
+          <ul
+            data-lenis-prevent
+            className="mt-3 max-h-[420px] overflow-y-auto border-t border-white/10 [scrollbar-color:rgb(255_255_255/0.25)_transparent] [scrollbar-width:thin]"
+          >
             {filteredMembers.length > 0 ? (
-              filteredMembers.map((member, index) => (
-                <MemberRow key={member.id} member={member} index={index} />
+              filteredMembers.map((member) => (
+                <li
+                  key={member.id}
+                  className="flex flex-col gap-1 border-b border-white/10 py-4 pr-2 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div>
+                    <p className="text-lg font-bold text-pd-bone">{member.name}</p>
+                    <p className="text-pd-bone/60">{[member.role, member.team].filter(Boolean).join(" · ")}</p>
+                  </div>
+                  <p className="text-pd-light-grey">{member.batchYear}</p>
+                </li>
               ))
             ) : (
-              <div className="py-12 text-center text-zinc-500 text-sm">
-                No former members found matching your search.
-              </div>
+              <li className="py-8 text-pd-bone/60">No members match that search. Try another name or team.</li>
             )}
-          </div>
-        </GlassContainer>
+          </ul>
+        </div>
       </div>
     </section>
-  );
-}
-
-function MemberRow({ member, index }: { member: FormerMember; index: number }) {
-  // Get initials for fallback avatar
-  const initials = member.name
-    .split(" ")
-    .map((n) => n[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("");
-
-  // Team badge color styling
-  const getBadgeStyle = (team: FormerMember["team"]) => {
-    switch (team) {
-      case "Web & App Development":
-        return "bg-blue-500/10 text-blue-400 border-blue-500/20";
-      case "Game Development":
-        return "bg-purple-500/10 text-purple-400 border-purple-500/20";
-      case "Competitive Programming":
-        return "bg-amber-500/10 text-amber-400 border-amber-500/20";
-      case "Multimedia":
-        return "bg-rose-500/10 text-rose-400 border-rose-500/20";
-      default:
-        return "bg-zinc-800 text-zinc-300 border-zinc-700";
-    }
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: Math.min(index * 0.02, 0.3) }}
-      className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-zinc-900/40 transition-colors"
-    >
-      {/* Left: Avatar + Name + Role */}
-      <div className="flex items-center gap-3.5">
-        <div className="size-10 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-xs font-bold text-pd-green shadow-inner flex-shrink-0">
-          {initials}
-        </div>
-        <div>
-          <h4 className="text-sm sm:text-base font-semibold text-zinc-100 leading-tight">
-            {member.name}
-          </h4>
-          {member.role && (
-            <p className="text-xs text-zinc-400 flex items-center gap-1 mt-0.5">
-              <Award className="size-3 text-zinc-500" />
-              {member.role}
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* Right: Batch Year */}
-      <div className="flex items-center gap-2.5 sm:justify-end">
-        <span className="text-xs text-zinc-400 flex items-center gap-1 bg-zinc-900/80 px-2.5 py-1 rounded-full border border-zinc-800/80">
-          <Calendar className="size-3 text-zinc-500" />
-          {member.batchYear}
-        </span>
-      </div>
-    </motion.div>
   );
 }
