@@ -72,9 +72,7 @@ export function NavbarDemo() {
                   data-active={active}
                   aria-current={active ? "page" : undefined}
                 >
-                  <span className="pd-nav-text" data-tone={item.tone}>
-                    {item.name}
-                  </span>
+                  {item.name}
                 </Link>
               );
             })}

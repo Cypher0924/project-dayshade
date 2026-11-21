@@ -84,6 +84,16 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [tone, setTone] = useState<NavTone>("dark");
 
+  // A route change resets the page to the top, but the scroll event that would clear
+  // `visible` arrives a frame later. Reset in the same render so the new page never
+  // shows the scrolled bar (and its active pill) for a frame.
+  const pathname = usePathname();
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setVisible(false);
+  }
+
   const detectTone = () => {
     // Look at what is directly underneath the nav and use the closest
     // `data-nav-tone` ancestor; default to dark.
@@ -143,7 +153,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       data-tone={visible ? tone : undefined}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-[calc(100%_-_2*var(--gutter))] flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-3 lg:flex dark:bg-transparent",
+        "relative z-[60] mx-auto hidden w-full max-w-[calc(100%_-_2*var(--gutter))] flex-row items-center justify-between self-start rounded-full px-4 py-3 lg:flex",
         visible && "pd-nav-body",
         className
       )}
@@ -182,9 +192,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               key={`link-${idx}`}
               href={item.link}
             >
-              <span className="pd-nav-text" data-tone={item.tone ?? "green"}>
-                {item.name}
-              </span>
+              {item.name}
             </Link>
           );
         }
@@ -201,7 +209,9 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             {hovered === idx && (
               <motion.div
                 layoutId="hovered"
-                className="absolute inset-0 h-full w-full rounded-full bg-primary/60 dark:bg-neutral-950/80"
+                // Radius as a style so Motion keeps it round while the highlight slides between links
+                style={{ borderRadius: 9999 }}
+                className="absolute inset-0 h-full w-full bg-pd-bone/[0.06]"
               />
             )}
             <span className="relative z-20">{item.name}</span>
@@ -230,7 +240,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       data-tone={visible ? tone : undefined}
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between px-0 py-2 lg:hidden",
         visible && "pd-nav-body",
         className
       )}
@@ -270,7 +280,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-stretch justify-start gap-3 rounded-[28px] bg-black/70 px-4 py-6 backdrop-blur-2xl shadow-[0_0_30.3px_-4px_rgba(0,0,0,0.53),inset_1px_1px_0_rgba(255,255,255,0.14)]",
+            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-stretch justify-start gap-3 rounded-[28px] border border-pd-bone/10 bg-pd-black px-4 py-6 shadow-[0_12px_32px_-12px_rgb(0_0_0/0.6)]",
             className
           )}
         >
@@ -352,14 +362,12 @@ export const NavbarButton = ({
         href={href || undefined}
         // @ts-ignore
         className={cn(
-          "pd-nav-pill relative z-20 h-9 px-5 text-[15px]",
+          "pd-nav-cta relative z-20 h-9 px-5 text-[15px]",
           className
         )}
         {...props}
       >
-        <span className="pd-nav-text" data-tone="purple">
-          {children}
-        </span>
+        {children}
       </Tag>
     );
   }

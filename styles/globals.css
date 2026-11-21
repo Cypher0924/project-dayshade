@@ -188,10 +188,11 @@
     background:
       radial-gradient(
         circle 340px at calc(var(--mx) * 1px) calc(var(--my) * 1px),
-        rgb(74 238 152 / calc(0.24 * var(--glow))),
+        rgb(74 238 152 / calc(0.16 * var(--glow))),
         transparent 70%
       ),
-      rgb(255 255 255 / 0.03);
+      /* Fades out behind the content area so the pattern sits back as a background */
+      radial-gradient(ellipse 70% 60% at 50% 45%, rgb(255 255 255 / 0.003), rgb(255 255 255 / 0.009));
     -webkit-mask-image: url(/assets/pattern-mask.webp);
     mask-image: url(/assets/pattern-mask.webp);
     -webkit-mask-size: max(1200px, 100%) auto;
@@ -216,121 +217,62 @@
     @apply max-w-7xl mx-auto px-4 md:px-8;
   }
 
+  /* Scrolled nav bar: near-opaque so page content never shows through it */
   .pd-nav-body {
-    --pd-nav-shadow: 0 0 30.3px -4px rgba(0, 0, 0, 0.53);
-    --pd-nav-edge:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.35),
-      inset -1px -1px 0 rgba(255, 255, 255, 0.06);
     border-radius: 40px;
-    box-shadow: var(--pd-nav-shadow), var(--pd-nav-edge);
-    backdrop-filter: blur(24px) saturate(1.2);
-    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid rgb(236 236 236 / 0.08);
+    background-color: rgb(25 25 25 / 0.9);
+    box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     transition: background-color 300ms ease, border-color 300ms ease;
   }
   .pd-nav-body[data-tone="light"] {
     background-color: rgba(204, 204, 204, 0.4);
   }
-  .pd-nav-body[data-tone="dark"] {
-    background-color: rgba(25, 25, 25, 0.82);
-    --pd-nav-edge:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.14),
-      inset -1px -1px 0 rgba(255, 255, 255, 0.03);
-  }
 
-  /* Pill (nav link / join button) */
+  /* Nav link pill. The current page is a solid bone pill; green stays reserved for actions. */
   .pd-nav-pill {
-    position: relative;
-    isolation: isolate;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 29px;
-    font-weight: 900;
+    border-radius: 9999px;
+    font-weight: 600;
     line-height: 1;
     white-space: nowrap;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 45%),
-      rgba(20, 20, 22, 0.55);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    box-shadow:
-      inset 0 2px 5px rgba(255, 255, 255, 0.07),
-      inset 0 -6px 12px rgba(0, 0, 0, 0.55),
-      0 2px 8px rgba(0, 0, 0, 0.35);
-    transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+    color: rgb(236 236 236 / 0.7);
+    /* No transition: a fading active pill flashes white when the route changes */
   }
-
-  .pd-nav-pill::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.85) 0%,
-      rgba(255, 255, 255, 0.35) 18%,
-      rgba(255, 255, 255, 0) 42%,
-      rgba(255, 255, 255, 0) 70%,
-      rgba(255, 255, 255, 0.28) 100%
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-    pointer-events: none;
-  }
-  /* Hover */
   .pd-nav-pill:not([data-active="true"]):hover {
-    transform: translateY(-1px);
-    background:
-      linear-gradient(180deg, rgba(125, 3, 255, 0.6) 12%, rgba(0, 0, 0, 0) 100%),
-      rgba(30, 10, 55, 0.7);
-    box-shadow:
-      inset 0 2px 6px rgba(255, 255, 255, 0.25),
-      inset 0 -8px 14px rgba(0, 0, 0, 0.45),
-      0 0 18px rgba(125, 3, 255, 0.45);
+    color: var(--color-pd-bone);
+    background-color: rgb(236 236 236 / 0.06);
   }
-  .pd-nav-pill:not([data-active="true"]):hover .pd-nav-text {
-    background: none;
-    -webkit-text-fill-color: #ffffff;
-    color: #ffffff;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
-  }
-  .pd-nav-pill:focus-visible {
-    outline: 2px solid #67ffaf;
-    outline-offset: 2px;
-  }
-
-  /* Active ("Clicked Button") */
   .pd-nav-pill[data-active="true"] {
-    background:
-      linear-gradient(180deg, #4aee98 12%, rgba(0, 0, 0, 0) 100%),
-      rgba(10, 40, 24, 0.75);
-    box-shadow:
-      inset 0 2px 6px rgba(255, 255, 255, 0.35),
-      inset 0 -8px 14px rgba(0, 0, 0, 0.45),
-      0 0 18px rgba(74, 238, 152, 0.45);
-  }
-  .pd-nav-pill[data-active="true"] .pd-nav-text {
-    background: none;
-    -webkit-text-fill-color: #ffffff;
-    color: #ffffff;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+    color: var(--color-pd-black);
+    background-color: var(--color-pd-bone);
   }
 
-  /* Gradient text */
-  .pd-nav-text {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+  /* Join CTA in the scrolled bar: same treatment as PillLink primary */
+  .pd-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--color-pd-black);
+    background-color: var(--color-pd-green);
+    transition: background-color 200ms ease;
   }
-  .pd-nav-text[data-tone="purple"] {
-    background-image: linear-gradient(90deg, #cdabd3 0%, #7d03ff 100%);
+  .pd-nav-cta:hover {
+    background-color: var(--color-pd-bone);
   }
-  .pd-nav-text[data-tone="green"] {
-    background-image: linear-gradient(90deg, #67ffaf 0%, #0d4d2c 100%);
+
+  .pd-nav-pill:focus-visible,
+  .pd-nav-cta:focus-visible {
+    outline: 2px solid var(--color-pd-green);
+    outline-offset: 2px;
   }
 
   /* Hamburger / close icon on mobile */
